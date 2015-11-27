@@ -66,10 +66,16 @@ public class DisplayUserData extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.content_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarContent);
         setSupportActionBar(toolbar);
         TableLayout tb = (TableLayout) findViewById(R.id.displayTable);
+
+
+
+
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener()
 // {
