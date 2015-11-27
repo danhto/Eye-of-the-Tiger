@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "org.eyeoftiger.eyeofthetiger"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url "http://cloudant.github.io/cloudant-sync-eap/repository/" }
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+    // Other dependencies
+    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-core', version:'0.14.0'
+    // include this if you're targeting Android. If you also want datastore encryption
+    // you will need to include cloudant-sync-datastore-android-encryption as well (see below).
+    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android', version:'0.14.0'
+    // include this if you're targeting Android and want datastore encryption. You will also need
+    // cloudant-sync-datastore-android (see above).
+    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android-encryption', version:'0.14.0'
+    // include this if you're targeting Java SE
+    compile group: 'com.cloudant', name: 'cloudant-sync-datastore-javase', version:'0.14.0'
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
