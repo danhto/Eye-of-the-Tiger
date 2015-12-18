@@ -27,6 +27,8 @@ import android.view.View;
 
 import com.cloudant.sync.datastore.DocumentNotFoundException;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -52,6 +54,25 @@ public class MainActivity extends AppCompatActivity
         } catch (DocumentNotFoundException e) {
             e.printStackTrace();
         }
+
+        //Count students
+        int present = 0;
+
+        for (int i = 0; i < dbData.getData().size(); i++) {
+
+            if (dbData.getData().get(i).get("user_status").equals("Present")) {
+                present++;
+            }
+        }
+
+        //Update text views to show present and absent numbers
+        TextView presentTv = (TextView) findViewById(R.id.present_number);
+        presentTv.setText(String.format("%d", present));
+        presentTv.setBackgroundResource(R.drawable.cell_shape);
+
+        TextView absentTv = (TextView) findViewById(R.id.away_number);
+        absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
+        absentTv.setBackgroundResource(R.drawable.cell_shape);
 
         try {
             DatabaseInfo db = new DatabaseInfo(getApplicationContext());
@@ -141,30 +162,5 @@ public class MainActivity extends AppCompatActivity
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
         startActivity(launchBrowser);
     }
-/*
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
 
-        int action = MotionEventCompat.getActionMasked(event);
-
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-
-                return true;
-            case (MotionEvent.ACTION_MOVE) :
-
-                return true;
-            case (MotionEvent.ACTION_UP) :
-
-                return true;
-            case (MotionEvent.ACTION_CANCEL) :
-
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE) :
-
-                return true;
-            default :
-                return super.onTouchEvent(event);
-        }
-    }*/
 }

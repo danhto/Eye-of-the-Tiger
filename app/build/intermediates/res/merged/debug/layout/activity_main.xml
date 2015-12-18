@@ -28,6 +28,35 @@
             android:textSize="50sp"
             android:timeZone="Canada/Toronto"/>
 
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView android:id="@+id/present_number"
+                android:gravity="center"
+                android:textColor="#00FF00"
+                android:textSize="60sp" />
+
+            <TextView android:id="@+id/away_number"
+                android:gravity="center"
+                android:textColor="#ff4000"
+                android:textSize="60sp"/>
+
+        </TableRow>
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:text="Students Present"
+                android:textColor="#00FF00"
+                android:gravity="center"
+                android:textSize="14sp"/>
+
+            <TextView android:text="Students Away"
+                android:textColor="#ff4000"
+                android:gravity="center"
+                android:textSize="14sp"/>
+
+        </TableRow>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
