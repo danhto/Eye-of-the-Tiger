@@ -21,6 +21,13 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <DigitalClock android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:format12Hour="true"
+            android:textSize="50sp"
+            android:timeZone="Canada/Toronto"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,10 +47,6 @@
         <!--include layout="@layout/content_main" /-->
 
     </TableLayout>
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>
 <!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EOT%20-%20Nov%2024%20(splash)/EyeOfTheTiger/app/src/main/res/layout/activity_main.xml -->
