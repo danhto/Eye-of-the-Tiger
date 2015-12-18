@@ -3,6 +3,7 @@ package org.eyeoftiger.eyeofthetiger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -73,24 +74,10 @@ public class DisplayUserData extends AppCompatActivity
         setSupportActionBar(toolbar);
         TableLayout tb = (TableLayout) findViewById(R.id.displayTable);
 
-
-
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener()
-// {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        tb.setOnTouchListener(new OnSwipeTouchListener(this)
+        //Adds swipe functionality to whole secondary screen
+        CoordinatorLayout secondaryview = (CoordinatorLayout) findViewById(R.id.secondaryview);
+        secondaryview.setOnTouchListener(new OnSwipeTouchListener(this)
         {
-
             public void onSwipeTop()
             {
 
@@ -98,14 +85,14 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeRight()
             {
-                //Starting a new Intent
-                Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(nextScreen);
+
             }
 
             public void onSwipeLeft()
             {
-
+                //Starting a new Intent
+                Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(nextScreen);
             }
 
             public void onSwipeBottom()
@@ -118,6 +105,8 @@ public class DisplayUserData extends AppCompatActivity
                 return gestureDetector.onTouchEvent(event);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         createColumnHeadings();
     }
@@ -205,160 +194,58 @@ public class DisplayUserData extends AppCompatActivity
 
         //This method fills in the rest of the table
         fillDisplay(table);
+
     }
 
-    public void fillDisplay(TableLayout table)
-    {
-
+    public void fillDisplay(TableLayout table) {
         //Call the table object
         TableLayout tab = (TableLayout) findViewById(R.id.displayTable);
         final TextView tv = new TextView(this);
 
-        // Create a DatastoreManager using application internal storage path
-        File path = getApplicationContext().getDir("datastores", Context.MODE_PRIVATE);
-        File path2 = getApplicationContext().getDir("datastores2", Context.MODE_PRIVATE);
-        DatastoreManager manager = new DatastoreManager(path.getAbsolutePath());
-        DatastoreManager manager2 = new DatastoreManager(path2.getAbsolutePath());
-
-        Datastore ds = null;
-        Datastore ds2 = null;
-
-        //Open the local datastore
-        try
-        {
-            ds = manager.openDatastore("datastore");
-            ds2 = manager.openDatastore("datastore2");
-        }
-        catch (DatastoreNotCreatedException e)
-        {
-            e.printStackTrace();
-        }
-
-        String databaseName[] = {"dynamic_user_info", "static_user_info", "administrator_info", "class_info"};
-        String databaseKey = "hadjohneftemandstingunty";
-        String databasePassword = "9494e46f4adc8778200304f821dc2bf54a9d05d5";
-        //Call our online cloudant database changing the name at the end changes which database is called
-        URI uri = null;
-        URI uri2 = null;
-
-        try
-        {
-            uri = new URI("https://"+databaseKey+":"+databasePassword+"@eyeofthetiger.cloudant.com/" + databaseName[1]);
-            uri2 = new URI("https://"+databaseKey+":"+databasePassword+"@eyeofthetiger.cloudant.com/" + databaseName[0]);
-        }
-        catch (URISyntaxException e)
-        {
-            e.printStackTrace();
-        }
-
         //An array that holds all the field names in the database
         String keys[] = {"user_last_name", "user_first_name", "user_status"};
 
-        // Replicate from the remote to local database
-        Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
-        Replicator replicator2 = ReplicatorBuilder.pull().from(uri2).to(ds2).build();
-
-        // Fire-and-forget (there are easy ways to monitor the state too)
-        replicator.start();
-        replicator2.start();
-
         TableRow tb = null;
 
-        try
-        {
-            for (int i = 0; i < ds.getDocumentCount(); i++)
-            {
+        ArrayList<Map<String, String>> dbData = MainActivity.dbData.getData();
 
-                //Get _id of current document
-                String id = ds.getAllDocumentIds().get(i).toString();
+        for (int i = 0; i < dbData.size(); i++) {
+            //Create textview that will hold parsed data
+            TextView tmpId = new TextView(this);
 
-                //Gets the json object of the document
-                BasicDocumentRevision doc = ds.getDocument(id);
-                BasicDocumentRevision doc2 = ds2.getDocument(id);
+            //Create table row object that will hold row data
+            tb = new TableRow(this);
 
-                //Parse json document into a map of fields -> values
-                Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
-                Map<String, String> docMap2 = parseJsonDoc(doc2.getBody().toString());
+            //Get a single document from data
+            Map<String, String> currentDoc = dbData.get(i);
 
-                //Create textview that will hold parsed data
-                TextView tmpId = new TextView(this);
+            //Get current documents id
+            String id = currentDoc.get("id");
 
-                //Create table row object that will hold row data
-                tb = new TableRow(this);
+            //Set current document id into a textview and add it into tale row as first column
+            tmpId.setText(id);
+            tb.addView(tmpId);
 
-                //Set current docment id into a textview and add it into tale row as first column
-                tmpId.setText(id);
-                tb.addView(tmpId);
+            //Do the same for the rest of the fields and values in the document
+            for (String key : keys) {
 
-                //Do the same for the rest of the fields and values in the document
-                for (String key : keys)
-                {
+                TextView tmpTv = new TextView(this);
+                String value = currentDoc.get(key);
 
-                    TextView tmpTv = new TextView(this);
-                    String value = "";
-
-                    if (key.equals("user_status")) {
-                        value = docMap2.get(key);
-                    }
-                    else {
-                        value = docMap.get(key);
-                    }
-
-                    if (!value.isEmpty()) {
-                        tmpTv.setText(value);
-                        tb.addView(tmpTv);
-                    }
-                    else {
-                        tmpTv.setText("ERROR");
-                        tb.addView(tmpTv);
-                    }
+                if (!value.isEmpty()) {
+                    tmpTv.setText(value);
+                    tb.addView(tmpTv);
+                } else {
+                    tmpTv.setText("ERROR");
+                    tb.addView(tmpTv);
                 }
-
-                //Set the parameters of the table row
-                tb.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-
-                //Add the whole row with all document data to the table
-                table.addView(tb);
             }
 
-        }
-        catch (DocumentNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+            //Set the parameters of the table row
+            tb.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
-    }
-
-    private Map<String, String> parseJsonDoc(String body)
-    {
-        if (!body.isEmpty()) {
-            //Removes the } bracket from the json string
-            String removeExtras = body.replaceAll("\\}", "");
-
-            //remove all "'s from the json string
-            removeExtras = removeExtras.replaceAll("\"", "");
-
-            //Remove all { from the json string
-            removeExtras = removeExtras.replaceAll("\\{", "");
-
-            //Json string you now be field: value, field: value, ...
-
-            //This is map object that will hold fields and values
-            Map<String, String> dataMap = new TreeMap<String, String>();
-
-            //Split the json string into field: value pairs
-            String docValues[] = removeExtras.split(",");
-
-            //For each field: value pair add it to the datamap with field as key and value as value
-            for (String pair : docValues) {
-                String keyVal[] = pair.split(":");
-                dataMap.put(keyVal[0], keyVal[1]);
-            }
-
-            return dataMap;
-        }
-        else {
-            return null;
+            //Add the whole row with all document data to the table
+            table.addView(tb);
         }
     }
 
