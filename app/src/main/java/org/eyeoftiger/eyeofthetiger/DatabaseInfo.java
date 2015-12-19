@@ -149,7 +149,10 @@ public class DatabaseInfo
             //For each field: value pair add it to the datamap with field as key and value as value
             for (String pair : docValues) {
                 String keyVal[] = pair.split(":");
-                dataMap.put(keyVal[0], keyVal[1]);
+
+                if (keyVal.length > 1) {
+                    dataMap.put(keyVal[0], keyVal[1]);
+                }
             }
 
             return dataMap;

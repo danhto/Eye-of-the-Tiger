@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         for (int i = 0; i < dbData.getData().size(); i++) {
 
-            if (dbData.getData().get(i).get("user_status").equals("Present")) {
+            if (dbData.getData().get(i).get("user_status").toLowerCase().equals("present")) {
                 present++;
             }
         }
