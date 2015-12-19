@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity
         //Update text views to show present and absent numbers
         TextView presentTv = (TextView) findViewById(R.id.present_number);
         presentTv.setText(String.format("%d", present));
-        presentTv.setBackgroundResource(R.drawable.cell_shape);
+        presentTv.setBackgroundResource(R.drawable.cell_shape_main);
 
         TextView absentTv = (TextView) findViewById(R.id.away_number);
         absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
-        absentTv.setBackgroundResource(R.drawable.cell_shape);
+        absentTv.setBackgroundResource(R.drawable.cell_shape_main);
 
         try {
             DatabaseInfo db = new DatabaseInfo(getApplicationContext());

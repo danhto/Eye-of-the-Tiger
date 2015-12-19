@@ -553,10 +553,11 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020042
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020043
 int drawable abc_textfield_search_material 0x7f020044
 int drawable cell_shape 0x7f020045
-int drawable design_fab_background 0x7f020046
-int drawable design_snackbar_background 0x7f020047
-int drawable notification_template_icon_bg 0x7f020049
-int drawable splash_tiger 0x7f020048
+int drawable cell_shape_main 0x7f020046
+int drawable design_fab_background 0x7f020047
+int drawable design_snackbar_background 0x7f020048
+int drawable notification_template_icon_bg 0x7f02004a
+int drawable splash_tiger 0x7f020049
 int id action0 0x7f0c0078
 int id action_bar 0x7f0c005a
 int id action_bar_activity_content 0x7f0c0000
