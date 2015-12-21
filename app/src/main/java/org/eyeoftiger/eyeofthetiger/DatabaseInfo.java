@@ -29,7 +29,7 @@ import java.util.TreeMap;
 public class DatabaseInfo
 {
 
-    private  ArrayList<Map<String, String>> unsortedData = new ArrayList<Map<String, String>>();
+    private ArrayList<Map<String, String>> unsortedData = new ArrayList<Map<String, String>>();
     private ArrayList<String[]> dataByLastName = new ArrayList<String[]>();
     private ArrayList<String[]> dataByFirstName = new ArrayList<String[]>();
     private ArrayList<String[]> dataByNumOfLates = new ArrayList<String[]>();
@@ -38,17 +38,20 @@ public class DatabaseInfo
     private Context applicationContext;
     private TableLayout activeTable;
 
-    public DatabaseInfo(Context context) throws DocumentNotFoundException {
+    public DatabaseInfo(Context context) throws DocumentNotFoundException
+    {
         applicationContext = context;
         unsortedData = retrieveRawData();
 
     }
 
-    public ArrayList<Map<String, String>> getData() {
+    public ArrayList<Map<String, String>> getData()
+    {
         return unsortedData;
     }
 
-    private ArrayList<Map<String, String>> retrieveRawData() throws DocumentNotFoundException {
+    private ArrayList<Map<String, String>> retrieveRawData() throws DocumentNotFoundException
+    {
 
         ArrayList<Map<String, String>> tmpList = new ArrayList<Map<String, String>>();
 
@@ -81,8 +84,8 @@ public class DatabaseInfo
 
         try
         {
-            uri = new URI("https://"+databaseKey+":"+databasePassword+"@eyeofthetiger.cloudant.com/" + databaseName[1]);
-            uri2 = new URI("https://"+databaseKey+":"+databasePassword+"@eyeofthetiger.cloudant.com/" + databaseName[0]);
+            uri = new URI("https://" + databaseKey + ":" + databasePassword + "@eyeofthetiger.cloudant.com/" + databaseName[1]);
+            uri2 = new URI("https://" + databaseKey + ":" + databasePassword + "@eyeofthetiger.cloudant.com/" + databaseName[0]);
         }
         catch (URISyntaxException e)
         {
@@ -100,7 +103,8 @@ public class DatabaseInfo
         replicator.start();
         replicator2.start();
 
-        for (int i = 0; i < ds.getDocumentCount(); i++) {
+        for (int i = 0; i < ds.getDocumentCount(); i++)
+        {
 
             //Get _id of current document
             String id = ds.getAllDocumentIds().get(i).toString();
@@ -116,7 +120,8 @@ public class DatabaseInfo
             //Place current document id into map
             docMap.put("id", id);
 
-            for (String key: docMap2.keySet()) {
+            for (String key : docMap2.keySet())
+            {
                 docMap.put(key, docMap2.get(key));
 
             }
@@ -127,8 +132,10 @@ public class DatabaseInfo
         return tmpList;
     }
 
-    private Map<String, String> parseJsonDoc(String body) {
-        if (!body.isEmpty()) {
+    private Map<String, String> parseJsonDoc(String body)
+    {
+        if (!body.isEmpty())
+        {
             //Removes the } bracket from the json string
             String removeExtras = body.replaceAll("\\}", "");
 
@@ -147,16 +154,20 @@ public class DatabaseInfo
             String docValues[] = removeExtras.split(",");
 
             //For each field: value pair add it to the datamap with field as key and value as value
-            for (String pair : docValues) {
+            for (String pair : docValues)
+            {
                 String keyVal[] = pair.split(":");
 
-                if (keyVal.length > 1) {
+                if (keyVal.length > 1)
+                {
                     dataMap.put(keyVal[0], keyVal[1]);
                 }
             }
 
             return dataMap;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }

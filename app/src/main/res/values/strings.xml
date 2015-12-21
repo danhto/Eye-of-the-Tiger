@@ -2,4 +2,6 @@
     <string name="app_name">Eye of the Tiger</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_display_user_data">DisplayUserData</string>
+    <string name="red_string">Red</string>
+    <string name="green_string">Green</string>
 </resources>

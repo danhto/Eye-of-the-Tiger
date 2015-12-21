@@ -2206,8 +2206,9 @@ containing a value of this type.
         public static final int cell_shape_main=0x7f020046;
         public static final int design_fab_background=0x7f020047;
         public static final int design_snackbar_background=0x7f020048;
-        public static final int notification_template_icon_bg=0x7f02004a;
+        public static final int notification_template_icon_bg=0x7f02004b;
         public static final int splash_tiger=0x7f020049;
+        public static final int tiger_white=0x7f02004a;
     }
     public static final class id {
         public static final int action0=0x7f0c0078;
@@ -2437,8 +2438,10 @@ containing a value of this type.
         public static final int app_name=0x7f060015;
         public static final int appbar_scrolling_view_behavior=0x7f060016;
         public static final int character_counter_pattern=0x7f060017;
+        public static final int green_string=0x7f060018;
+        public static final int red_string=0x7f060019;
         public static final int status_bar_notification_info_overflow=0x7f060013;
-        public static final int title_activity_display_user_data=0x7f060018;
+        public static final int title_activity_display_user_data=0x7f06001a;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007f;

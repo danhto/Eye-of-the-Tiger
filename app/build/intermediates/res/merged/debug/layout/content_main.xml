@@ -35,11 +35,11 @@
         android:layout_alignParentBottom="true"
         android:stretchColumns="*"
         android:id="@+id/displayTable"
-        android:background="#33b5e5"
+        android:background="#bbdefb"
         android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp">
     </TableLayout>
 
     </android.support.design.widget.AppBarLayout>
 <!--/RelativeLayout-->
-</android.support.design.widget.CoordinatorLayout><!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EOT%20-%20Nov%2024%20(splash)/EyeOfTheTiger/app/src/main/res/layout/content_main.xml -->
+</android.support.design.widget.CoordinatorLayout><!-- From: file:/C:/Users/simonma/Documents/GitHub/EyeOfTheTiger/app/src/main/res/layout/content_main.xml -->

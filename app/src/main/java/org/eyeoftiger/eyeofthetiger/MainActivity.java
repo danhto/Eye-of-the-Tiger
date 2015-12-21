@@ -49,18 +49,23 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Get database data
-        try {
+        try
+        {
             dbData = new DatabaseInfo(getApplicationContext());
-        } catch (DocumentNotFoundException e) {
+        }
+        catch (DocumentNotFoundException e)
+        {
             e.printStackTrace();
         }
 
         //Count students
         int present = 0;
 
-        for (int i = 0; i < dbData.getData().size(); i++) {
+        for (int i = 0; i < dbData.getData().size(); i++)
+        {
 
-            if (dbData.getData().get(i).get("user_status").toLowerCase().equals("present")) {
+            if (dbData.getData().get(i).get("user_status").toLowerCase().equals("present"))
+            {
                 present++;
             }
         }
@@ -74,9 +79,12 @@ public class MainActivity extends AppCompatActivity
         absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
         absentTv.setBackgroundResource(R.drawable.cell_shape_main);
 
-        try {
+        try
+        {
             DatabaseInfo db = new DatabaseInfo(getApplicationContext());
-        } catch (DocumentNotFoundException e) {
+        }
+        catch (DocumentNotFoundException e)
+        {
             e.printStackTrace();
         }
 

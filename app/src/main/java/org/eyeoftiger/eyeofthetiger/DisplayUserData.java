@@ -197,7 +197,8 @@ public class DisplayUserData extends AppCompatActivity
 
     }
 
-    public void fillDisplay(TableLayout table) {
+    public void fillDisplay(TableLayout table)
+    {
         //Call the table object
         TableLayout tab = (TableLayout) findViewById(R.id.displayTable);
         final TextView tv = new TextView(this);
@@ -209,7 +210,8 @@ public class DisplayUserData extends AppCompatActivity
 
         ArrayList<Map<String, String>> dbData = MainActivity.dbData.getData();
 
-        for (int i = 0; i < dbData.size(); i++) {
+        for (int i = 0; i < dbData.size(); i++)
+        {
             //Create textview that will hold parsed data
             TextView tmpId = new TextView(this);
 
@@ -227,15 +229,19 @@ public class DisplayUserData extends AppCompatActivity
             tb.addView(tmpId);
 
             //Do the same for the rest of the fields and values in the document
-            for (String key : keys) {
+            for (String key : keys)
+            {
 
                 TextView tmpTv = new TextView(this);
                 String value = currentDoc.get(key);
 
-                if (!value.isEmpty()) {
+                if (!value.isEmpty())
+                {
                     tmpTv.setText(value);
                     tb.addView(tmpTv);
-                } else {
+                }
+                else
+                {
                     tmpTv.setText("ERROR");
                     tb.addView(tmpTv);
                 }
