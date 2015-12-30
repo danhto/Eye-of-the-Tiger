@@ -1,11 +1,12 @@
 package org.eyeoftiger.eyeofthetiger;
 
-import android.content.Context;
+//import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+//import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+/*
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.Datastore;
@@ -52,11 +54,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
+*/
+
+import java.util.Map;
+import java.util.ArrayList;
+
 
 public class DisplayUserData extends AppCompatActivity
 {
@@ -90,8 +96,9 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeLeft()
             {
-                //Starting a new Intent
+                //go to home page
                 Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+                nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextScreen);
             }
 
@@ -131,6 +138,28 @@ public class DisplayUserData extends AppCompatActivity
         if (id == R.id.action_settings)
         {
             return true;
+        }
+        // home page menu
+        else if (id == R.id.home_page)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(nextScreen);
+            return true;
+        }
+        // user data menu
+        else if (id == R.id.title_activity_display_user_data)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+            startActivity(nextScreen);
+            return true;
+        }
+        // website menu
+        else if (id == R.id.website_link)
+        {
+            Uri uriUrl = Uri.parse("http://www.eyeoftiger.org/");
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+            startActivity(launchBrowser);
         }
 
         return super.onOptionsItemSelected(item);

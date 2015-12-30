@@ -1,38 +1,39 @@
 package org.eyeoftiger.eyeofthetiger;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+//import android.content.SharedPreferences;
+//import android.graphics.Color;
+//import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.MotionEventCompat;
+//import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.Snackbar;
+//import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
+//import android.util.Log;
+//import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AbsListView;
-import android.widget.AbsoluteLayout;
+//import android.widget.AbsListView;
+//import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.TableLayout;
-import android.widget.TableRow;
+//import android.widget.TableRow;
 import android.widget.TextView;
 import android.net.Uri;
-import android.content.Intent;
-import android.view.View;
+//import android.content.Intent;
+//import android.view.View;
 
 import com.cloudant.sync.datastore.DocumentNotFoundException;
 
-import org.w3c.dom.Text;
+//import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-import java.util.Map;
+//import java.util.ArrayList;
+//import java.util.Map;
 
-import static android.graphics.Color.BLUE;
+//import static android.graphics.Color.BLUE;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
             public void onSwipeRight()
             {
-                //Starting a new Intent
+                //go to user data page
                 Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
                 startActivity(nextScreen);
             }
@@ -120,16 +121,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // get websiteButton id
-        websiteButton = (Button) findViewById(R.id.websitebutton);
-        websiteButton.setOnClickListener(new View.OnClickListener()
-        {
-            // go to website when button clicked
-            public void onClick(View view)
-            {
-                goToWebsite(view);
-            }
-        });
     }
 
     @Override
@@ -149,9 +140,31 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
+        // settings menu
         if (id == R.id.action_settings)
         {
             return true;
+        }
+        // home page menu
+        else if (id == R.id.home_page)
+        {
+            Intent nextScreen = new Intent(MainActivity.this, MainActivity.class);
+            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(nextScreen);
+            return true;
+        }
+        // user data menu
+        else if (id == R.id.title_activity_display_user_data)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+            startActivity(nextScreen);
+            return true;
+        }
+        // website menu
+        else if (id == R.id.website_link)
+        {
+            goToUrl("http://www.eyeoftiger.org/");
         }
 
         return super.onOptionsItemSelected(item);
@@ -164,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     // launch web browser to website
-    private void goToUrl(String url)
+    public void goToUrl(String url)
     {
         Uri uriUrl = Uri.parse(url);
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);

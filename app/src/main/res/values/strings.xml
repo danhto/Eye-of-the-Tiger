@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Eye of the Tiger</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_display_user_data">DisplayUserData</string>
-    <string name="red_string">Red</string>
-    <string name="green_string">Green</string>
+    <string name="title_activity_display_user_data">User Data</string>
+    <string name="website_link">Team Website</string>
+    <string name="home_page">Home Page</string>
 </resources>
