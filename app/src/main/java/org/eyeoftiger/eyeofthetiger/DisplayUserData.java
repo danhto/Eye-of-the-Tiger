@@ -1,11 +1,12 @@
 package org.eyeoftiger.eyeofthetiger;
 
-import android.content.Context;
+//import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+//import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+/*
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.Datastore;
@@ -52,11 +54,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
+*/
+
+import java.util.Map;
+import java.util.ArrayList;
+
 
 public class DisplayUserData extends AppCompatActivity
 {
@@ -90,10 +96,17 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeLeft()
             {
+<<<<<<< HEAD
                 //Starting a new Intent
                 //Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
                 //startActivity(nextScreen);
                 finish();
+=======
+                //go to home page
+                Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+                nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(nextScreen);
+>>>>>>> origin/master
             }
 
             public void onSwipeBottom()
@@ -133,12 +146,35 @@ public class DisplayUserData extends AppCompatActivity
         {
             return true;
         }
+        // home page menu
+        else if (id == R.id.home_page)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(nextScreen);
+            return true;
+        }
+        // user data menu
+        else if (id == R.id.title_activity_display_user_data)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+            startActivity(nextScreen);
+            return true;
+        }
+        // website menu
+        else if (id == R.id.website_link)
+        {
+            Uri uriUrl = Uri.parse("http://www.eyeoftiger.org/");
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+            startActivity(launchBrowser);
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     public void createColumnHeadings()
     {
+        int headingTextSize = 16;
 
         //Get table layout defined in content_main.xml
         TableLayout table = (TableLayout) findViewById(R.id.displayTable);
@@ -153,6 +189,7 @@ public class DisplayUserData extends AppCompatActivity
 
         //TextView is an object that lets you put text on the interface
         TextView USER_ID = new TextView(this);
+        USER_ID.setTextSize(headingTextSize);
 
         //Set parameters of the textview
         USER_ID.setLayoutParams(lp);
@@ -167,18 +204,21 @@ public class DisplayUserData extends AppCompatActivity
         USER_ID.setGravity(Gravity.CENTER);
 
         TextView LAST_NAME = new TextView(this);
+        LAST_NAME.setTextSize(headingTextSize);
         LAST_NAME.setLayoutParams(lp);
         LAST_NAME.setText("LAST_NAME");
         LAST_NAME.setBackgroundResource(R.drawable.cell_shape);
         LAST_NAME.setGravity(Gravity.CENTER);
 
         TextView FIRST_NAME = new TextView(this);
+        FIRST_NAME.setTextSize(headingTextSize);
         FIRST_NAME.setLayoutParams(lp);
         FIRST_NAME.setText("FIRST_NAME");
         FIRST_NAME.setBackgroundResource(R.drawable.cell_shape);
         FIRST_NAME.setGravity(Gravity.CENTER);
 
         TextView STATUS = new TextView(this);
+        STATUS.setTextSize(headingTextSize);
         STATUS.setLayoutParams(lp);
         STATUS.setText("STATUS");
         STATUS.setBackgroundResource(R.drawable.cell_shape);
@@ -200,6 +240,7 @@ public class DisplayUserData extends AppCompatActivity
 
     public void fillDisplay(TableLayout table)
     {
+        int rowTextSize = 14;
         //Call the table object
         TableLayout tab = (TableLayout) findViewById(R.id.displayTable);
         final TextView tv = new TextView(this);
@@ -208,6 +249,8 @@ public class DisplayUserData extends AppCompatActivity
         String keys[] = {"user_last_name", "user_first_name", "user_status"};
 
         TableRow tb = null;
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(4, 1, 4, 1);
 
         ArrayList<Map<String, String>> dbData = MainActivity.dbData.getData();
 
@@ -215,9 +258,17 @@ public class DisplayUserData extends AppCompatActivity
         {
             //Create textview that will hold parsed data
             TextView tmpId = new TextView(this);
+            tmpId.setTextSize(rowTextSize);
+            tmpId.setLayoutParams(lp);
 
             //Create table row object that will hold row data
             tb = new TableRow(this);
+            tb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("CLICKABLE!!");
+                }
+            });
 
             //Get a single document from data
             Map<String, String> currentDoc = dbData.get(i);
@@ -234,6 +285,9 @@ public class DisplayUserData extends AppCompatActivity
             {
 
                 TextView tmpTv = new TextView(this);
+                tmpTv.setTextSize(rowTextSize);
+                tmpTv.setLayoutParams(lp);
+
                 String value = currentDoc.get(key);
 
                 if (!value.isEmpty())

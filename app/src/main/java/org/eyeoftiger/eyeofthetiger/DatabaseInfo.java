@@ -1,10 +1,10 @@
 package org.eyeoftiger.eyeofthetiger;
 
 import android.content.Context;
-import android.view.Gravity;
+//import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.Datastore;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Eye of the Tiger</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="title_activity_display_user_data">DisplayUserData</string>
     <string name="red_string">Red</string>
     <string name="green_string">Green</string>
@@ -14,4 +15,9 @@
     <string name="error_invalid_user">This user is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+=======
+    <string name="title_activity_display_user_data">User Data</string>
+    <string name="website_link">Team Website</string>
+    <string name="home_page">Home Page</string>
+>>>>>>> origin/master
 </resources>
