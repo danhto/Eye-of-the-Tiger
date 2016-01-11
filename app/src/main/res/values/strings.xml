@@ -4,4 +4,14 @@
     <string name="title_activity_display_user_data">DisplayUserData</string>
     <string name="red_string">Red</string>
     <string name="green_string">Green</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_user">Admin User</string>
+    <string name="prompt_password">Admin Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_user">This user is invalid</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
 </resources>

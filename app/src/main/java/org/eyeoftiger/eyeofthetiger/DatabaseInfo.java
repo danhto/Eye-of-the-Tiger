@@ -15,6 +15,7 @@ import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -132,8 +133,87 @@ public class DatabaseInfo
         return tmpList;
     }
 
-    private Map<String, String> parseJsonDoc(String body)
+    static ArrayList<Map<String, String>> retrieveRawAdminData(Context appContext) throws DocumentNotFoundException
     {
+
+        ArrayList<Map<String, String>> tmpList = new ArrayList<>();
+
+        // Create a DatastoreManager using application internal storage path
+        File path = appContext.getDir("datastores", Context.MODE_PRIVATE);
+        DatastoreManager manager = new DatastoreManager(path.getAbsolutePath());
+
+        Datastore ds = null;
+
+        //Open the local datastore
+        try
+        {
+            ds = manager.openDatastore("admins");
+        }
+        catch (DatastoreNotCreatedException e)
+        {
+            e.printStackTrace();
+        }
+
+        String databaseName[] = {"dynamic_user_info", "static_user_info", "administrator_info", "class_info"};
+        String databaseKey = "hadjohneftemandstingunty";
+        String databasePassword = "9494e46f4adc8778200304f821dc2bf54a9d05d5";
+        //Call our online cloudant database changing the name at the end changes which database is called
+        URI uri = null;
+
+        try
+        {
+            uri = new URI("https://" + databaseKey + ":" + databasePassword + "@eyeofthetiger.cloudant.com/" + databaseName[2]);
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+
+        //An array that holds all the field names in the database
+        String keys[] = {"admin_last_name", "admin_first_name"};
+
+        // Replicate from the remote to local database
+        Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
+
+        // Fire-and-forget (there are easy ways to monitor the state too)
+        replicator.start();
+
+        for (int i = 0; i < ds.getDocumentCount(); i++)
+        {
+
+            //Get _id of current document
+            String id = ds.getAllDocumentIds().get(i);
+
+            //Gets the json object of the document
+            BasicDocumentRevision doc = ds.getDocument(id);
+
+            Map<String, String> adminUser = new HashMap<>();
+
+            //Parse json document into a map of fields -> values
+            Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
+            if (docMap.isEmpty()) continue;
+
+            for (String key : keys)
+            {
+                if (docMap.containsKey(key)) adminUser.put(key, docMap.get(key));
+            }
+
+            if (!adminUser.isEmpty()) tmpList.add(adminUser);
+        }
+
+        /*try {
+            ds.close();
+            manager.deleteDatastore("admins");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        return tmpList;
+    }
+
+    private static Map<String, String> parseJsonDoc(String body)
+    {
+        //i think theres a built-in JSON parser for android but whatever
         if (!body.isEmpty())
         {
             //Removes the } bracket from the json string

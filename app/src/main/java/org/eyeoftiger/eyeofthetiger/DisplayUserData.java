@@ -91,8 +91,9 @@ public class DisplayUserData extends AppCompatActivity
             public void onSwipeLeft()
             {
                 //Starting a new Intent
-                Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(nextScreen);
+                //Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+                //startActivity(nextScreen);
+                finish();
             }
 
             public void onSwipeBottom()
