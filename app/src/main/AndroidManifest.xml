@@ -47,6 +47,15 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".UserDetailsActivity"
+            android:label="@string/title_activity_user_details"
+            android:parentActivityName=".DisplayUserData"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.eyeoftiger.eyeofthetiger.DisplayUserData" />
+        </activity>
     </application>
 
 </manifest>

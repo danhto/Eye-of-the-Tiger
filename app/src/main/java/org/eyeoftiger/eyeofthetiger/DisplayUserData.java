@@ -96,17 +96,17 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeLeft()
             {
-<<<<<<< HEAD
+
                 //Starting a new Intent
                 //Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
                 //startActivity(nextScreen);
                 finish();
-=======
+
                 //go to home page
                 Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
                 nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextScreen);
->>>>>>> origin/master
+
             }
 
             public void onSwipeBottom()
@@ -266,7 +266,9 @@ public class DisplayUserData extends AppCompatActivity
             tb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("CLICKABLE!!");
+                    //go to user data page
+                    Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
+                    startActivity(nextScreen);
                 }
             });
 

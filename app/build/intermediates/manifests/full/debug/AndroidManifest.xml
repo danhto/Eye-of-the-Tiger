@@ -10,6 +10,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,6 +48,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.eyeoftiger.eyeofthetiger.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.eyeoftiger.eyeofthetiger.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="org.eyeoftiger.eyeofthetiger.UserDetailsActivity"
+            android:label="@string/title_activity_user_details"
+            android:parentActivityName="org.eyeoftiger.eyeofthetiger.DisplayUserData"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.eyeoftiger.eyeofthetiger.DisplayUserData" />
         </activity>
     </application>
 
