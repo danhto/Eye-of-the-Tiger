@@ -6,6 +6,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 //import android.widget.TextView;
 
+import com.google.common.eventbus.Subscribe;
+import java.util.concurrent.CountDownLatch;
+import com.cloudant.sync.notifications.ReplicationCompleted;
+import com.cloudant.sync.notifications.ReplicationErrored;
+import com.cloudant.sync.replication.ErrorInfo;
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
@@ -100,9 +105,27 @@ public class DatabaseInfo
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
         Replicator replicator2 = ReplicatorBuilder.pull().from(uri2).to(ds2).build();
 
-        // Fire-and-forget (there are easy ways to monitor the state too)
-        replicator.start();
-        replicator2.start();
+        // Begin replication for both datastores and wait until they are both complete
+        try {
+
+            CountDownLatch latch = new CountDownLatch(1);
+            Listener listener = new Listener(latch);
+            replicator.getEventBus().register(listener);
+            replicator.start();
+            latch.await();
+            replicator.getEventBus().unregister(listener);
+
+            latch = new CountDownLatch(1);
+            listener = new Listener(latch);
+            replicator2.getEventBus().register(listener);
+            replicator2.start();
+            latch.await();
+            replicator2.getEventBus().unregister(listener);
+
+        } catch (InterruptedException e) {
+            System.err.print(e);
+        }
+
 
         for (int i = 0; i < ds.getDocumentCount(); i++)
         {
@@ -175,8 +198,17 @@ public class DatabaseInfo
         // Replicate from the remote to local database
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
 
-        // Fire-and-forget (there are easy ways to monitor the state too)
-        replicator.start();
+        // Begin replication of data and waits for it to complete
+        try {
+            CountDownLatch latch = new CountDownLatch(1);
+            Listener listener = new Listener(latch);
+            replicator.getEventBus().register(listener);
+            replicator.start();
+            latch.await();
+            replicator.getEventBus().unregister(listener);
+        }
+        catch (InterruptedException e) {
+        }
 
         for (int i = 0; i < ds.getDocumentCount(); i++)
         {
@@ -257,4 +289,32 @@ public class DatabaseInfo
         return null;
     }
 
+    /**
+     * A {@code ReplicationListener} that sets a latch when it's told the
+     * replication has finished.
+     */
+    private static class Listener {
+
+        private final CountDownLatch latch;
+        public ErrorInfo error = null;
+        public int documentsReplicated;
+        public int batchesReplicated;
+
+        Listener(CountDownLatch latch) {
+            this.latch = latch;
+        }
+
+        @Subscribe
+        public void complete(ReplicationCompleted event) {
+            this.documentsReplicated = event.documentsReplicated;
+            this.batchesReplicated = event.batchesReplicated;
+            latch.countDown();
+        }
+
+        @Subscribe
+        public void error(ReplicationErrored event) {
+            this.error = event.errorInfo;
+            latch.countDown();
+        }
+    }
 }

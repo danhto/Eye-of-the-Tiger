@@ -80,22 +80,16 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
 
         //get list of admins
-        try
-        {
-            //DatabaseInfo db = new DatabaseInfo();
-            admins = DatabaseInfo.retrieveRawAdminData(getApplicationContext());
-            Logger.getGlobal().log(Level.INFO, "" + admins.size());
 
-            for (Map<String,String> a : admins) {
-                Logger.getGlobal().log(Level.INFO, a.toString() + "\t" + a.get("admin_first_name"));
-            }
+        //DatabaseInfo db = new DatabaseInfo();
+        //admins = DatabaseInfo.retrieveRawAdminData(getApplicationContext());
+        admins = SplashScreen.getAdminInfo();
+        Logger.getGlobal().log(Level.INFO, "" + admins.size());
 
+        for (Map<String,String> a : admins) {
+            Logger.getGlobal().log(Level.INFO, a.toString() + "\t" + a.get("admin_first_name"));
         }
-        catch (DocumentNotFoundException e)
-        {
-            e.printStackTrace();
 
-        }
 
     }
 

@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cloudant.sync.datastore.DocumentNotFoundException;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Created by simon on 20-Nov-2015.
  */
@@ -11,6 +16,7 @@ import android.os.Bundle;
 // set up the splash screen before app starts
 public class SplashScreen extends Activity
 {
+    private static  ArrayList<Map<String, String>> adminInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,10 +30,16 @@ public class SplashScreen extends Activity
             {
                 try
                 {
-                    sleep(1500);
+                    adminInfo = DatabaseInfo.retrieveRawAdminData(getApplicationContext());
+                    sleep(4500);
+
+
                 }
                 catch (InterruptedException e)
                 {
+                    e.printStackTrace();
+                }
+                catch (DocumentNotFoundException e) {
                     e.printStackTrace();
                 }
                 finally
@@ -38,6 +50,10 @@ public class SplashScreen extends Activity
             }
         };
         timerThread.start();
+    }
+
+    public static ArrayList<Map<String, String>> getAdminInfo() {
+        return adminInfo;
     }
 
     @Override
