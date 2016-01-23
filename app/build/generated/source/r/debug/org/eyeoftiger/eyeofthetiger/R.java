@@ -2304,6 +2304,7 @@ containing a value of this type.
         public static final int present_number=0x7f0c0071;
         public static final int progress_circular=0x7f0c0006;
         public static final int progress_horizontal=0x7f0c0007;
+        public static final int quit=0x7f0c0091;
         public static final int radio=0x7f0c0054;
         public static final int right=0x7f0c0023;
         public static final int screen=0x7f0c0027;
@@ -2466,12 +2467,13 @@ containing a value of this type.
         public static final int large_text=0x7f06001f;
         public static final int prompt_password=0x7f060020;
         public static final int prompt_user=0x7f060021;
-        public static final int red_string=0x7f060022;
+        public static final int quit=0x7f060022;
+        public static final int red_string=0x7f060023;
         public static final int status_bar_notification_info_overflow=0x7f060013;
-        public static final int title_activity_display_user_data=0x7f060023;
-        public static final int title_activity_login=0x7f060024;
-        public static final int title_activity_user_details=0x7f060025;
-        public static final int website_link=0x7f060026;
+        public static final int title_activity_display_user_data=0x7f060024;
+        public static final int title_activity_login=0x7f060025;
+        public static final int title_activity_user_details=0x7f060026;
+        public static final int website_link=0x7f060027;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007f;

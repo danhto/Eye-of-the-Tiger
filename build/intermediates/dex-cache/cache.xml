@@ -2,130 +2,130 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-a12610b691badc083292234f81593271efce1a69.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\15.0\ed727a8d9f247e2050281cb083f1c77b09dcb5cd\guava-15.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ed727a8d9f247e2050281cb083f1c77b09dcb5cd">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\guava-15.0-c04c9f03a0b99bb274b4f817486b732ef65ec330.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-1854ae0cc90d85e6e5243b3454ed54e7944c7505.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.almworks.sqlite4java\sqlite4java\1.0.392\d6234e08ff4e1607ff5321da2579571f05ff778d\sqlite4java-1.0.392.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d6234e08ff4e1607ff5321da2579571f05ff778d">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\sqlite4java-1.0.392-d9672c1ac128588f984bbcd79b428e9cc70e9991.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jar="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-f6eef31a993659636403f7beacdc6f82059a2f9a.jar" />
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-eeb73a6c581693181710eea0fc25e2cc70e7879e.jar" />
     </item>
     <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-android\0.14.0\9169f420e483b1c7927dadc2b93122121d6bf3a5\cloudant-sync-datastore-android-0.14.0.jar"
+        jar="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="9169f420e483b1c7927dadc2b93122121d6bf3a5">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-android-0.14.0-187775a4a698e4bd66621b0161189d3ffe0cd4fc.jar" />
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-fe2c44897286e547de420d3b100d25c54d11eb3c.jar" />
     </item>
     <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.1.1\38d2b3c0c89af5b937fd98c3e558bf6b58c14aa2\jackson-databind-2.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="38d2b3c0c89af5b937fd98c3e558bf6b58c14aa2">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-databind-2.1.1-f955dd36cd583fc2635af03d28235e975175f78d.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.1.1\b01cc83e745fc4425a3968fafbf8e5b8254a6dd\jackson-annotations-2.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0b01cc83e745fc4425a3968fafbf8e5b8254a6dd">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.1.1-57840362a472dee1ca96002ed02581e017f3ed70.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-e9eb01b2c2e4998c5931b55db2ae4c85f6c4a804.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\eu.the4thfloor.volley\com.android.volley\2015.05.28\b0b08cc0ac897e596abe6b263a9507cba875b705\com.android.volley-2015.05.28.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\com.android.volley-2015.05.28-122cfbb17367b7ef6d78fcb95e8e1463362d0a0c.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-core\0.14.0\b924137b9917bf8b8ced72427ddad9132412286d\cloudant-sync-datastore-core-0.14.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="b924137b9917bf8b8ced72427ddad9132412286d">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-core-0.14.0-3f7fee026802d6bf2ebf8ea97be7281852e4ad16.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-android-encryption\0.14.0\ded78ba86ed89fbee5cc4fa77a5bfafec9518abb\cloudant-sync-datastore-android-encryption-0.14.0.jar"
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-android-encryption\0.14.0\ded78ba86ed89fbee5cc4fa77a5bfafec9518abb\cloudant-sync-datastore-android-encryption-0.14.0.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="ded78ba86ed89fbee5cc4fa77a5bfafec9518abb">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-android-encryption-0.14.0-429c72f1ff47d1d652da5de0f1c32d0ede189f62.jar" />
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-android-encryption-0.14.0-2d30e1d54a3ed5cbab0385252e2ecb52fda03af0.jar" />
     </item>
     <item
-        jar="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-2d2981bf3bf790e84ae65e9389ae933a50edb386.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-javase\0.14.0\4e887c66ca1a67405e5a70c2f61dfaf8b58b8411\cloudant-sync-datastore-javase-0.14.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="4e887c66ca1a67405e5a70c2f61dfaf8b58b8411">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-javase-0.14.0-1066bd8751850e0ac55e85bf4f512a0ff749c710.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.10\4b95f4897fa13f2cd904aee711aeafc0c5295cd8\commons-codec-1.10.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="4b95f4897fa13f2cd904aee711aeafc0c5295cd8">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\commons-codec-1.10-0ba9df4296c26d658eeea2a071e52c90a5413d2c.jar" />
-    </item>
-    <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.1\82ad1c5f92f6dcc6291f5c46ebacb975eaa844de\jackson-core-2.1.1.jar"
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.1\82ad1c5f92f6dcc6291f5c46ebacb975eaa844de\jackson-core-2.1.1.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="82ad1c5f92f6dcc6291f5c46ebacb975eaa844de">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.1-be70b9228dad37ebffd47b6646360651fa9548da.jar" />
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.1-6eebe23dc57516c4c71e2f1f542caf469eed7cdb.jar" />
     </item>
     <item
-        jar="I:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jar="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-3e4a7ec8bc777292f0cb42e6774d3044d9589923.jar" />
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-ad8dbc152abff8fefa84b9519f323379cbf9318a.jar" />
     </item>
     <item
-        jar="C:\Users\DanLaptop\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar"
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.almworks.sqlite4java\sqlite4java\1.0.392\d6234e08ff4e1607ff5321da2579571f05ff778d\sqlite4java-1.0.392.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d6234e08ff4e1607ff5321da2579571f05ff778d">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\sqlite4java-1.0.392-10b91d57fba75ff50bad18407ef7f5129c4f6165.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.1.1\38d2b3c0c89af5b937fd98c3e558bf6b58c14aa2\jackson-databind-2.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="38d2b3c0c89af5b937fd98c3e558bf6b58c14aa2">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-databind-2.1.1-a9f5619bd0547d8cc4594c65f6a0befeae113ee6.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-core\0.14.0\b924137b9917bf8b8ced72427ddad9132412286d\cloudant-sync-datastore-core-0.14.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b924137b9917bf8b8ced72427ddad9132412286d">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-core-0.14.0-2518b695141878a53d79a6ad397e27425d738eab.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-android\0.14.0\9169f420e483b1c7927dadc2b93122121d6bf3a5\cloudant-sync-datastore-android-0.14.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9169f420e483b1c7927dadc2b93122121d6bf3a5">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-android-0.14.0-3a9b93e63fa3978b36f5f0d3588056d7c3a9b359.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.1.1\b01cc83e745fc4425a3968fafbf8e5b8254a6dd\jackson-annotations-2.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0b01cc83e745fc4425a3968fafbf8e5b8254a6dd">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.1.1-a9f6db4a83b9051e6c44d5c7f58fdebe15406d9d.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-8ebe2ec2dc5688216b2dc83109600d4e52003794.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\DanLaptop\AndroidStudioProjects\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\commons-io-2.4-2c5e9a6349e16c4e1f0102ac91176d2a925295d6.jar" />
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\commons-io-2.4-62c28e8f79a6071a7ce783c6858ae69382f74d29.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.10\4b95f4897fa13f2cd904aee711aeafc0c5295cd8\commons-codec-1.10.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4b95f4897fa13f2cd904aee711aeafc0c5295cd8">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\commons-codec-1.10-801fdb3fd20ebadb5e7eab5770fe327f12a8b330.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.cloudant\cloudant-sync-datastore-javase\0.14.0\4e887c66ca1a67405e5a70c2f61dfaf8b58b8411\cloudant-sync-datastore-javase-0.14.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4e887c66ca1a67405e5a70c2f61dfaf8b58b8411">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\cloudant-sync-datastore-javase-0.14.0-b90b537b3cfbcfe5dc13b1694bc56f418768db7f.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-2263720bcb97964dd85142825d08dc99a7adcd10.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\classes-c908f062c405d1e1cd7b8474e15936362fb572f4.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\eu.the4thfloor.volley\com.android.volley\2015.05.28\b0b08cc0ac897e596abe6b263a9507cba875b705\com.android.volley-2015.05.28.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\com.android.volley-2015.05.28-c704a49c03df4eb06fb3c29af9fc2cc2ad643291.jar" />
+    </item>
+    <item
+        jar="C:\Users\simonma\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\15.0\ed727a8d9f247e2050281cb083f1c77b09dcb5cd\guava-15.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ed727a8d9f247e2050281cb083f1c77b09dcb5cd">
+        <dex dex="C:\Users\simonma\Documents\GitHub\EyeOfTheTiger\app\build\intermediates\pre-dexed\debug\guava-15.0-c2c66ebbe411061b08dd8f13b0fae35259d89da8.jar" />
     </item>
 
 </items>
