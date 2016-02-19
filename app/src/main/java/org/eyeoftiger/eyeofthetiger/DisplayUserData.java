@@ -1,6 +1,7 @@
 package org.eyeoftiger.eyeofthetiger;
 
 //import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ public class DisplayUserData extends AppCompatActivity
 {
 
     final int NUM_OF_FIELDS = 4;
+    public static String selectedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -133,6 +135,7 @@ public class DisplayUserData extends AppCompatActivity
         return true;
     }
 
+    // settings menu list
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -167,6 +170,13 @@ public class DisplayUserData extends AppCompatActivity
             Uri uriUrl = Uri.parse("http://www.eyeoftiger.org/");
             Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
             startActivity(launchBrowser);
+        }
+        // logout menu
+        else if (id == R.id.quit)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), LoginActivity.class);
+            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(nextScreen);
         }
 
         return super.onOptionsItemSelected(item);
@@ -263,9 +273,12 @@ public class DisplayUserData extends AppCompatActivity
 
             //Create table row object that will hold row data
             tb = new TableRow(this);
-            tb.setOnClickListener(new View.OnClickListener() {
+
+            tb.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     //go to user data page
                     Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
                     startActivity(nextScreen);
@@ -273,7 +286,7 @@ public class DisplayUserData extends AppCompatActivity
             });
 
             //Get a single document from data
-            Map<String, String> currentDoc = dbData.get(i);
+            final Map<String, String> currentDoc = dbData.get(i);
 
             //Get current documents id
             String id = currentDoc.get("id");
@@ -281,6 +294,16 @@ public class DisplayUserData extends AppCompatActivity
             //Set current document id into a textview and add it into tale row as first column
             tmpId.setText(id);
             tb.addView(tmpId);
+
+            tb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //go to user data page
+                    Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
+                    startActivity(nextScreen);
+                    selectedUser = currentDoc.get("user_first_name") + " " + currentDoc.get("user_last_name");
+                }
+            });
 
             //Do the same for the rest of the fields and values in the document
             for (String key : keys)
