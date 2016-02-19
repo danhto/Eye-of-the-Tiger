@@ -1,36 +1,32 @@
 package org.eyeoftiger.eyeofthetiger;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TextView;
-
-import android.app.AlertDialog;
-
-import com.cloudant.sync.datastore.DocumentNotFoundException;
-
 //import android.content.SharedPreferences;
 //import android.graphics.Color;
 //import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
 //import android.support.v4.view.MotionEventCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 //import android.util.Log;
 //import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 //import android.widget.AbsListView;
 //import android.widget.AbsoluteLayout;
+import android.widget.Button;
+import android.widget.TableLayout;
 //import android.widget.TableRow;
+import android.widget.TextView;
+import android.net.Uri;
 //import android.content.Intent;
 //import android.view.View;
+
+import com.cloudant.sync.datastore.DocumentNotFoundException;
 
 //import org.w3c.dom.Text;
 
@@ -50,13 +46,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /////////////////////
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /////////////////////
 
         //Get database data
         try
@@ -89,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
         absentTv.setBackgroundResource(R.drawable.cell_shape_main);
 
-        /*
         try
         {
             DatabaseInfo db = new DatabaseInfo(getApplicationContext());
@@ -98,9 +88,6 @@ public class MainActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
-        */
-
-        ////////////////////////
 
         //Add swipe functionality to whole primary screen
         TableLayout mainview = (TableLayout) findViewById(R.id.mainview);
@@ -136,35 +123,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //back button prompt on home page
-    @Override
-    public void onBackPressed()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setMessage("Do you want to logout?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //if user pressed "yes", then he is allowed to exit from application
-                finish();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //if user select "No", just cancel this dialog and continue with app
-                dialog.cancel();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -173,7 +131,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    // settings menu list
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -208,11 +165,6 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.website_link)
         {
             goToUrl("http://www.eyeoftiger.org/");
-        }
-        // logout menu
-        else if (id == R.id.quit)
-        {
-            finish();
         }
 
         return super.onOptionsItemSelected(item);

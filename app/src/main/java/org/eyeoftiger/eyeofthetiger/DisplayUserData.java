@@ -1,7 +1,6 @@
 package org.eyeoftiger.eyeofthetiger;
 
 //import android.content.Context;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -134,7 +133,6 @@ public class DisplayUserData extends AppCompatActivity
         return true;
     }
 
-    // settings menu list
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -169,13 +167,6 @@ public class DisplayUserData extends AppCompatActivity
             Uri uriUrl = Uri.parse("http://www.eyeoftiger.org/");
             Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
             startActivity(launchBrowser);
-        }
-        // logout menu
-        else if (id == R.id.quit)
-        {
-            Intent nextScreen = new Intent(getApplicationContext(), LoginActivity.class);
-            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(nextScreen);
         }
 
         return super.onOptionsItemSelected(item);
@@ -272,11 +263,9 @@ public class DisplayUserData extends AppCompatActivity
 
             //Create table row object that will hold row data
             tb = new TableRow(this);
-            tb.setOnClickListener(new View.OnClickListener()
-            {
+            tb.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     //go to user data page
                     Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
                     startActivity(nextScreen);

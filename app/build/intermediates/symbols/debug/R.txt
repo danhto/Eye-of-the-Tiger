@@ -652,7 +652,6 @@ int id pin 0x7f0c001b
 int id present_number 0x7f0c0071
 int id progress_circular 0x7f0c0006
 int id progress_horizontal 0x7f0c0007
-int id quit 0x7f0c0091
 int id radio 0x7f0c0054
 int id right 0x7f0c0023
 int id screen 0x7f0c0027
@@ -805,13 +804,12 @@ int string home_page 0x7f06001e
 int string large_text 0x7f06001f
 int string prompt_password 0x7f060020
 int string prompt_user 0x7f060021
-int string quit 0x7f060022
-int string red_string 0x7f060023
+int string red_string 0x7f060022
 int string status_bar_notification_info_overflow 0x7f060013
-int string title_activity_display_user_data 0x7f060024
-int string title_activity_login 0x7f060025
-int string title_activity_user_details 0x7f060026
-int string website_link 0x7f060027
+int string title_activity_display_user_data 0x7f060023
+int string title_activity_login 0x7f060024
+int string title_activity_user_details 0x7f060025
+int string website_link 0x7f060026
 int style AlertDialog_AppCompat 0x7f09007f
 int style AlertDialog_AppCompat_Light 0x7f090080
 int style Animation_AppCompat_Dialog 0x7f090081

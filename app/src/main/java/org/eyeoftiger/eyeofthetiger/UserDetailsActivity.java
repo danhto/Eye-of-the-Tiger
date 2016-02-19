@@ -10,14 +10,12 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UserDetailsActivity extends AppCompatActivity
-{
+public class UserDetailsActivity extends AppCompatActivity {
 
     private ArrayList<Map<String, String>> userData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -25,12 +23,11 @@ public class UserDetailsActivity extends AppCompatActivity
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

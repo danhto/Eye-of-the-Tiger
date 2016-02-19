@@ -12,4 +12,4 @@
         android:layout_margin="@dimen/text_margin" android:text="@string/large_text" />
 
 </android.support.v4.widget.NestedScrollView>
-<!-- From: file:/C:/Users/simonma/Documents/GitHub/EyeOfTheTiger/app/src/main/res/layout/content_user_details.xml -->
+<!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EyeOfTheTiger/app/src/main/res/layout/content_user_details.xml -->

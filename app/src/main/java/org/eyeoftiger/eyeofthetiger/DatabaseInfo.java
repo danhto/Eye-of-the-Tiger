@@ -1,32 +1,32 @@
 package org.eyeoftiger.eyeofthetiger;
 
 import android.content.Context;
+//import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+//import android.widget.TextView;
 
+import com.google.common.eventbus.Subscribe;
+import java.util.concurrent.CountDownLatch;
+import com.cloudant.sync.notifications.ReplicationCompleted;
+import com.cloudant.sync.notifications.ReplicationErrored;
+import com.cloudant.sync.replication.ErrorInfo;
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.DatastoreNotCreatedException;
 import com.cloudant.sync.datastore.DocumentNotFoundException;
-import com.cloudant.sync.notifications.ReplicationCompleted;
-import com.cloudant.sync.notifications.ReplicationErrored;
-import com.cloudant.sync.replication.ErrorInfo;
 import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
-import com.google.common.eventbus.Subscribe;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.CountDownLatch;
-
-//import android.view.Gravity;
-//import android.widget.TextView;
 
 
 /**
@@ -106,8 +106,7 @@ public class DatabaseInfo
         Replicator replicator2 = ReplicatorBuilder.pull().from(uri2).to(ds2).build();
 
         // Begin replication for both datastores and wait until they are both complete
-        try
-        {
+        try {
 
             CountDownLatch latch = new CountDownLatch(1);
             Listener listener = new Listener(latch);
@@ -123,9 +122,7 @@ public class DatabaseInfo
             latch.await();
             replicator2.getEventBus().unregister(listener);
 
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             System.err.print(e);
         }
 
@@ -202,8 +199,7 @@ public class DatabaseInfo
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
 
         // Begin replication of data and waits for it to complete
-        try
-        {
+        try {
             CountDownLatch latch = new CountDownLatch(1);
             Listener listener = new Listener(latch);
             replicator.getEventBus().register(listener);
@@ -211,8 +207,7 @@ public class DatabaseInfo
             latch.await();
             replicator.getEventBus().unregister(listener);
         }
-        catch (InterruptedException e)
-        {
+        catch (InterruptedException e) {
         }
 
         for (int i = 0; i < ds.getDocumentCount(); i++)
@@ -228,23 +223,14 @@ public class DatabaseInfo
 
             //Parse json document into a map of fields -> values
             Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
-            if (docMap.isEmpty())
-            {
-                continue;
-            }
+            if (docMap.isEmpty()) continue;
 
             for (String key : keys)
             {
-                if (docMap.containsKey(key))
-                {
-                    adminUser.put(key, docMap.get(key));
-                }
+                if (docMap.containsKey(key)) adminUser.put(key, docMap.get(key));
             }
 
-            if (!adminUser.isEmpty())
-            {
-                tmpList.add(adminUser);
-            }
+            if (!adminUser.isEmpty()) tmpList.add(adminUser);
         }
 
         /*try {
@@ -307,30 +293,26 @@ public class DatabaseInfo
      * A {@code ReplicationListener} that sets a latch when it's told the
      * replication has finished.
      */
-    private static class Listener
-    {
+    private static class Listener {
 
         private final CountDownLatch latch;
         public ErrorInfo error = null;
         public int documentsReplicated;
         public int batchesReplicated;
 
-        Listener(CountDownLatch latch)
-        {
+        Listener(CountDownLatch latch) {
             this.latch = latch;
         }
 
         @Subscribe
-        public void complete(ReplicationCompleted event)
-        {
+        public void complete(ReplicationCompleted event) {
             this.documentsReplicated = event.documentsReplicated;
             this.batchesReplicated = event.batchesReplicated;
             latch.countDown();
         }
 
         @Subscribe
-        public void error(ReplicationErrored event)
-        {
+        public void error(ReplicationErrored event) {
             this.error = event.errorInfo;
             latch.countDown();
         }
