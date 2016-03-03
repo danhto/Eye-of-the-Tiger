@@ -8,7 +8,11 @@ import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.DatastoreNotCreatedException;
+import com.cloudant.sync.datastore.DocumentBody;
+import com.cloudant.sync.datastore.DocumentBodyFactory;
+import com.cloudant.sync.datastore.DocumentException;
 import com.cloudant.sync.datastore.DocumentNotFoundException;
+import com.cloudant.sync.datastore.MutableDocumentRevision;
 import com.cloudant.sync.notifications.ReplicationCompleted;
 import com.cloudant.sync.notifications.ReplicationErrored;
 import com.cloudant.sync.replication.ErrorInfo;
@@ -36,6 +40,8 @@ public class DatabaseInfo
 {
 
     private ArrayList<Map<String, String>> unsortedData = new ArrayList<Map<String, String>>();
+    private Map<String, BasicDocumentRevision> dynamicUserDocuments;
+    private static Datastore dynamicDatastore = null;
     private ArrayList<String[]> dataByLastName = new ArrayList<String[]>();
     private ArrayList<String[]> dataByFirstName = new ArrayList<String[]>();
     private ArrayList<String[]> dataByNumOfLates = new ArrayList<String[]>();
@@ -75,6 +81,7 @@ public class DatabaseInfo
         {
             ds = manager.openDatastore("datastore");
             ds2 = manager.openDatastore("datastore2");
+            dynamicDatastore = ds2;
         }
         catch (DatastoreNotCreatedException e)
         {
@@ -129,32 +136,44 @@ public class DatabaseInfo
             System.err.print(e);
         }
 
-
         for (int i = 0; i < ds.getDocumentCount(); i++)
         {
 
             //Get _id of current document
             String id = ds.getAllDocumentIds().get(i).toString();
+            BasicDocumentRevision doc = null;
+            BasicDocumentRevision doc2 = null;
 
             //Gets the json object of the document
-            BasicDocumentRevision doc = ds.getDocument(id);
-            BasicDocumentRevision doc2 = ds2.getDocument(id);
-
-            //Parse json document into a map of fields -> values
-            Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
-            Map<String, String> docMap2 = parseJsonDoc(doc2.getBody().toString());
-
-            //Place current document id into map
-            docMap.put("id", id);
-
-            //Combine two documents maps into one
-            for (String key : docMap2.keySet())
+            if (!id.contains("_design/"))
             {
-                docMap.put(key, docMap2.get(key));
-
+                doc = ds.getDocument(id);
+                doc2 = ds2.getDocument(id);
             }
 
-            tmpList.add(docMap);
+            if (doc != null && doc2 != null)
+            {
+                //Store document for later use
+                // dynamicUserDocuments.put(id, doc2);
+
+                //Parse json document into a map of fields -> values
+                Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
+                Map<String, String> docMap2 = parseJsonDoc(doc2.getBody().toString());
+
+                //Place current document id into map
+                docMap.put("id", id);
+
+                //Combine two documents maps into one
+                for (String key : docMap2.keySet())
+                {
+                    docMap.put(key, docMap2.get(key));
+
+                }
+
+                tmpList.add(docMap);
+            }
+
+
         }
 
         return tmpList;
@@ -299,9 +318,77 @@ public class DatabaseInfo
         }
     }
 
-    public ArrayList<TableRow> getUnsortedData()
-    {
-        return null;
+    public static void setNewStatusData(Context appContext, String id, String status) {
+        /*
+        ArrayList<Map<String, String>> tmpList = new ArrayList<>();
+
+        // Create a DatastoreManager using application internal storage path
+        File path = appContext.getDir("datastores", Context.MODE_PRIVATE);
+        DatastoreManager manager = new DatastoreManager(path.getAbsolutePath());
+
+        Datastore ds = null;
+
+        //Open the local datastore
+        try
+        {
+            ds = manager.openDatastore("datastore");
+        }
+        catch (DatastoreNotCreatedException e)
+        {
+            e.printStackTrace();
+        }
+        */
+
+        String databaseName[] = {"dynamic_user_info", "static_user_info", "administrator_info", "class_info"};
+        String databaseKey = "hadjohneftemandstingunty";
+        String databasePassword = "9494e46f4adc8778200304f821dc2bf54a9d05d5";
+        //Call our online cloudant database changing the name at the end changes which database is called
+        URI uri = null;
+
+        try
+        {
+            uri = new URI("https://" + databaseKey + ":" + databasePassword + "@eyeofthetiger.cloudant.com/" + databaseName[0]);
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+
+        BasicDocumentRevision userDoc = null;
+
+        try {
+            userDoc = dynamicDatastore.getDocument(id);
+
+            MutableDocumentRevision revision = userDoc.mutableCopy();
+            DocumentBody docContent = revision.getBody();
+            Map<String, Object> contentMap = docContent.asMap();
+            contentMap.remove("user_status");
+            contentMap.put("user_status", status);
+            revision.body = DocumentBodyFactory.create(contentMap);
+            dynamicDatastore.updateDocumentFromRevision(revision);
+
+        } catch (DocumentNotFoundException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        // Replicate from the remote to local database
+        Replicator replicator = ReplicatorBuilder.push().from(dynamicDatastore).to(uri).build();
+
+        // Begin replication of data and waits for it to complete
+        try
+        {
+            CountDownLatch latch = new CountDownLatch(1);
+            Listener listener = new Listener(latch);
+            replicator.getEventBus().register(listener);
+            replicator.start();
+            latch.await();
+            replicator.getEventBus().unregister(listener);
+        }
+        catch (InterruptedException e)
+        {
+        }
     }
 
     /**

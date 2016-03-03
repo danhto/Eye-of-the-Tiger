@@ -62,9 +62,15 @@ public class MainActivity extends AppCompatActivity
         try
         {
             dbData = new DatabaseInfo(getApplicationContext());
+
+            // If NPE is detected keep retreaving data until data is set
+            while (dbData == null) {
+                dbData = new DatabaseInfo(getApplicationContext());
+            }
         }
         catch (DocumentNotFoundException e)
         {
+            System.err.println(e);
             e.printStackTrace();
         }
 
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < dbData.getData().size(); i++)
         {
 
-            if (dbData.getData().get(i).get("user_status").toLowerCase().equals("present"))
+            if (!dbData.getData().get(i).get("user_status").toUpperCase().equals("ABSENT"))
             {
                 present++;
             }
@@ -88,19 +94,6 @@ public class MainActivity extends AppCompatActivity
         TextView absentTv = (TextView) findViewById(R.id.away_number);
         absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
         absentTv.setBackgroundResource(R.drawable.cell_shape_main);
-
-        /*
-        try
-        {
-            DatabaseInfo db = new DatabaseInfo(getApplicationContext());
-        }
-        catch (DocumentNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        */
-
-        ////////////////////////
 
         //Add swipe functionality to whole primary screen
         TableLayout mainview = (TableLayout) findViewById(R.id.mainview);
