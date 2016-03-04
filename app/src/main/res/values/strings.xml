@@ -21,6 +21,18 @@
 
     <!-- Strings related to settings menu -->
     <string name="quit">Logout</string>
+    <string name="about">About</string>
+    <string name="about_text">
+        "Eye Of the Tiger Team\n\n"
+
+        "> Jason Kuffour\n"
+        "> Aloka Kumaranayake\n"
+        "> Philip Leung\n"
+        "> Dan To\n"
+        "> Simon Ma\n"
+
+    </string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -110,5 +122,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
 
 </resources>

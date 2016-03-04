@@ -15,6 +15,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import android.app.AlertDialog;
+import android.widget.Toast;
 
 import com.cloudant.sync.datastore.DocumentNotFoundException;
 
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity
             dbData = new DatabaseInfo(getApplicationContext());
 
             // If NPE is detected keep retreaving data until data is set
-            while (dbData == null) {
+            while (dbData == null)
+            {
                 dbData = new DatabaseInfo(getApplicationContext());
             }
         }
@@ -106,14 +108,14 @@ public class MainActivity extends AppCompatActivity
 
             public void onSwipeRight()
             {
-                //go to user data page
-                Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
-                startActivity(nextScreen);
+
             }
 
             public void onSwipeLeft()
             {
-
+                //go to user data page
+                Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+                startActivity(nextScreen);
             }
 
             public void onSwipeBottom()
@@ -202,9 +204,18 @@ public class MainActivity extends AppCompatActivity
         {
             goToUrl("http://www.eyeoftiger.org/");
         }
+        //about page
+        else if (id == R.id.about_page)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), About.class);
+            startActivity(nextScreen);
+            return true;
+        }
         // logout menu
         else if (id == R.id.quit)
         {
+            // logout toast message
+            Toast.makeText(getApplicationContext(), "Logging Out ...", Toast.LENGTH_SHORT).show();
             finish();
         }
 

@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
 import com.cloudant.sync.datastore.BasicDocumentRevision;
@@ -96,12 +97,6 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeRight()
             {
-
-            }
-
-            public void onSwipeLeft()
-            {
-
                 //Starting a new Intent
                 //Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
                 //startActivity(nextScreen);
@@ -109,8 +104,13 @@ public class DisplayUserData extends AppCompatActivity
 
                 //go to home page
                 Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
-                nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                nextScreen.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //nextScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextScreen);
+            }
+
+            public void onSwipeLeft()
+            {
 
             }
 
@@ -164,6 +164,7 @@ public class DisplayUserData extends AppCompatActivity
         else if (id == R.id.title_activity_display_user_data)
         {
             Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+            nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(nextScreen);
             return true;
         }
@@ -174,9 +175,19 @@ public class DisplayUserData extends AppCompatActivity
             Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
             startActivity(launchBrowser);
         }
+        //about page
+        else if (id == R.id.about_page)
+        {
+            Intent nextScreen = new Intent(getApplicationContext(), About.class);
+            startActivity(nextScreen);
+            return true;
+        }
         // logout menu
         else if (id == R.id.quit)
         {
+            // logout toast message
+            Toast.makeText(getApplicationContext(), "Logging Out ...", Toast.LENGTH_SHORT).show();
+
             Intent nextScreen = new Intent(getApplicationContext(), LoginActivity.class);
             nextScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(nextScreen);
@@ -186,11 +197,13 @@ public class DisplayUserData extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
         // If a user status has been changed clear table and repopulate with new data
-        if (UserDetailsActivity.getChangeStatus()) {
+        if (UserDetailsActivity.getChangeStatus())
+        {
             TableLayout table = (TableLayout) findViewById(R.id.displayTable);
             table.removeAllViewsInLayout();
             createColumnHeadings();
@@ -273,23 +286,31 @@ public class DisplayUserData extends AppCompatActivity
 
         ArrayList<Map<String, String>> dbData = null;
 
-        try {
-            try {
+        try
+        {
+            try
+            {
 
                 // If status has not been changed use originally synced data
-                if (!UserDetailsActivity.getChangeStatus()) {
+                if (!UserDetailsActivity.getChangeStatus())
+                {
                     dbData = MainActivity.dbData.getData();
                 }
-                else {
+                else
+                {
                     dbData = new DatabaseInfo(getApplicationContext()).getData();
                 }
 
-            } catch (NullPointerException e) {
+            }
+            catch (NullPointerException e)
+            {
 
                 // If a NPE is detected than repopulate the data
                 dbData = new DatabaseInfo(getApplicationContext()).getData();
             }
-        } catch (DocumentNotFoundException e) {
+        }
+        catch (DocumentNotFoundException e)
+        {
             System.err.println(e);
         }
 
@@ -315,9 +336,11 @@ public class DisplayUserData extends AppCompatActivity
             //tmpId.setText(id);
             //tb.addView(tmpId);
 
-            tb.setOnClickListener(new View.OnClickListener() {
+            tb.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     //go to user data page
                     Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
                     startActivity(nextScreen);

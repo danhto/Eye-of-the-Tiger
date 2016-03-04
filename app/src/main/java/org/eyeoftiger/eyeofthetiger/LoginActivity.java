@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity
                 }, 2000);
 
                 // loading toast message
-                Toast.makeText(getApplicationContext(), "Logging in ... Please wait", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Logging In ... Please wait", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity
     private boolean isPasswordValid(String user, String password)
     {
         // match this user with default password
-        return password.equals("admin") || password.equals("AlokaIsGreat");
+        return password.equals("admin");
     }
 
     //back button prompt on login page

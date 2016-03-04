@@ -1,21 +1,17 @@
 package org.eyeoftiger.eyeofthetiger;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -45,7 +41,8 @@ public class UserDetailsActivity extends AppCompatActivity
         fillDetailDisplay();
     }
 
-    private void fillDetailDisplay() {
+    private void fillDetailDisplay()
+    {
 
         int rowTextSize = 14;
         //Call the table object
@@ -65,9 +62,11 @@ public class UserDetailsActivity extends AppCompatActivity
         Map<String, String> userDataMap = null;
 
         //Search array of maps for map containing specific user data based on selected user
-        for (Map<String, String> userMap : userData) {
+        for (Map<String, String> userMap : userData)
+        {
 
-            if(userMap.get("id").equals(userId)) {
+            if (userMap.get("id").equals(userId))
+            {
                 userDataMap = userMap;
                 break;
             }
@@ -107,7 +106,7 @@ public class UserDetailsActivity extends AppCompatActivity
         //Create table row object that will hold row data
         tb = new TableRow(this);
 
-        for (String field: keys)
+        for (String field : keys)
         {
             //Create textview that will hold parsed data
             TextView tmpId = new TextView(this);
@@ -116,7 +115,8 @@ public class UserDetailsActivity extends AppCompatActivity
             tmpId.setGravity(Gravity.CENTER);
 
 
-            switch (field) {
+            switch (field)
+            {
                 // Adds appropriate columns and their data
                 case "user_number_of_absences":
                     tmpId.setText(userDataMap.get(field));
@@ -130,8 +130,8 @@ public class UserDetailsActivity extends AppCompatActivity
                 case "user_status":
                     // Creates a combo box for statuses
                     Spinner spin = new Spinner(this);
-                    String array[] = {"PRESENT","LATE","ABSENT"};
-                    ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, array);
+                    String array[] = {"PRESENT", "LATE", "ABSENT"};
+                    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, array);
                     spin.setAdapter(adapter);
 
                     // Identifies and displays user's current status
@@ -140,30 +140,39 @@ public class UserDetailsActivity extends AppCompatActivity
                     // Determine and set initial position of spinner
                     int spinnerPosition = 0;
 
-                    if (!userCurrentStatus.equals(0)) {
+                    if (!userCurrentStatus.equals(0))
+                    {
                         spinnerPosition = adapter.getPosition(userCurrentStatus);
                     }
-                    else {
+                    else
+                    {
                         spinnerPosition = adapter.getPosition("ABSENT");
                     }
                     spin.setSelection(spinnerPosition);
 
                     // Method to be performed when a new status is selected
-                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
                         @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                        {
                             //String status = ((Spinner) view).getAdapter().getItem(position).toString();
                             //String status = ((TextView)view).getText().toString();
                             String status = parent.getSelectedItem().toString();
 
                             // If status is changed write this change to the DB
-                            if (!status.equals(userCurrentStatus)) {
+                            if (!status.equals(userCurrentStatus))
+                            {
+                                // loading toast message
+                                Toast.makeText(getApplicationContext(), "Status Updated", Toast.LENGTH_SHORT).show();
+
                                 writeNewStatusToDB(status);
                             }
                         }
 
                         @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
+                        public void onNothingSelected(AdapterView<?> parent)
+                        {
 
                         }
                     });
@@ -194,7 +203,8 @@ public class UserDetailsActivity extends AppCompatActivity
                     int currentPeriod = 1;
 
                     // Format timetable display by Period: Class_name
-                    for (String course: timeTable) {
+                    for (String course : timeTable)
+                    {
                         tb = new TableRow(this);
                         tb.setLayoutParams(lp);
 
@@ -223,12 +233,14 @@ public class UserDetailsActivity extends AppCompatActivity
     }
 
     // Writes newly selected status to DB
-    private void writeNewStatusToDB(String status) {
+    private void writeNewStatusToDB(String status)
+    {
         statusChanged = true;
         DatabaseInfo.setNewStatusData(this, selectedPersonID, status);
     }
 
-    static public boolean getChangeStatus() {
+    static public boolean getChangeStatus()
+    {
         return statusChanged;
     }
 
