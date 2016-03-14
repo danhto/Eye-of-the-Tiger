@@ -62,10 +62,14 @@ import java.util.List;
 import java.util.TreeMap;
 */
 
+import com.cloudant.sync.datastore.Attachment;
 import com.cloudant.sync.datastore.DocumentNotFoundException;
 
+import java.io.File;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DisplayUserData extends AppCompatActivity
@@ -74,6 +78,8 @@ public class DisplayUserData extends AppCompatActivity
     final int NUM_OF_FIELDS = 4;
     public static String selectedUser;
     public static String selectedUserID;
+    public static Attachment selectedUserAttachment;
+    public static File selectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -284,7 +290,7 @@ public class DisplayUserData extends AppCompatActivity
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
         lp.setMargins(3, 1, 3, 1);
 
-        ArrayList<Map<String, String>> dbData = null;
+        ArrayList<Map<String, Object>> dbData = null;
 
         try
         {
@@ -327,45 +333,46 @@ public class DisplayUserData extends AppCompatActivity
             tb = new TableRow(this);
 
             //Get a single document from data
-            final Map<String, String> currentDoc = dbData.get(i);
+            final Map<String, Object> currentDoc = dbData.get(i);
 
             //Get current documents id
-            String id = currentDoc.get("id");
+            String id = (String)currentDoc.get("id");
 
             //Set current document id into a textview and add it into tale row as first column
             //tmpId.setText(id);
             //tb.addView(tmpId);
 
-            tb.setOnClickListener(new View.OnClickListener()
-            {
+            tb.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
+                    selectedUser = currentDoc.get("user_first_name") + " " + currentDoc.get("user_last_name");
+                    selectedUserID = (String)currentDoc.get("id");
+
+                    if (currentDoc.containsKey("attachment")) {
+                        selectedUserAttachment = (Attachment)currentDoc.get("attachment");
+                    } else {
+                        selectedUserAttachment = null;
+                    }
+
                     //go to user data page
                     Intent nextScreen = new Intent(getApplicationContext(), UserDetailsActivity.class);
                     startActivity(nextScreen);
-                    selectedUser = currentDoc.get("user_first_name") + " " + currentDoc.get("user_last_name");
-                    selectedUserID = currentDoc.get("id");
                 }
             });
 
             //Do the same for the rest of the fields and values in the document
-            for (String key : keys)
-            {
+            for (String key : keys) {
 
                 TextView tmpTv = new TextView(this);
                 tmpTv.setTextSize(rowTextSize);
                 tmpTv.setLayoutParams(lp);
 
-                String value = currentDoc.get(key);
+                String value = (String)currentDoc.get(key);
 
-                if (!value.isEmpty())
-                {
+                if (!value.isEmpty()) {
                     tmpTv.setText(value);
                     tb.addView(tmpTv);
-                }
-                else
-                {
+                } else {
                     tmpTv.setText("ERROR");
                     tb.addView(tmpTv);
                 }

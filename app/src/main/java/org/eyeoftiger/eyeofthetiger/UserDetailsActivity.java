@@ -1,5 +1,7 @@
 package org.eyeoftiger.eyeofthetiger;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,19 +9,22 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class UserDetailsActivity extends AppCompatActivity
 {
 
-    private ArrayList<Map<String, String>> userData;
+    private ArrayList<Map<String, Object>> userData;
     private String selectedPersonID;
     static private boolean statusChanged;
 
@@ -36,6 +41,19 @@ public class UserDetailsActivity extends AppCompatActivity
         TextView selectedUser = (TextView) findViewById(R.id.selected_name);
         selectedUser.setText(DisplayUserData.selectedUser);
         selectedPersonID = DisplayUserData.selectedUserID;
+
+        //image if applicable
+        ImageView iview = (ImageView) findViewById(R.id.imageView1);
+        if (DisplayUserData.selectedUserAttachment != null) {
+            try {
+                InputStream is =  DisplayUserData.selectedUserAttachment.getInputStream();
+                Bitmap bmap = BitmapFactory.decodeStream(is);
+                iview.setImageBitmap(bmap);
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fillDetailDisplay();
@@ -59,10 +77,10 @@ public class UserDetailsActivity extends AppCompatActivity
 
         //String userId = DisplayUserData.selectedUser.replaceAll(" ", "").trim();
         String userId = DisplayUserData.selectedUserID;
-        Map<String, String> userDataMap = null;
+        Map<String, Object> userDataMap = null;
 
         //Search array of maps for map containing specific user data based on selected user
-        for (Map<String, String> userMap : userData)
+        for (Map<String, Object> userMap : userData)
         {
 
             if (userMap.get("id").equals(userId))
@@ -119,11 +137,11 @@ public class UserDetailsActivity extends AppCompatActivity
             {
                 // Adds appropriate columns and their data
                 case "user_number_of_absences":
-                    tmpId.setText(userDataMap.get(field));
+                    tmpId.setText((String)userDataMap.get(field));
                     tb.addView(tmpId);
                     break;
                 case "user_number_of_lates":
-                    tmpId.setText(userDataMap.get(field));
+                    tmpId.setText((String)userDataMap.get(field));
                     tb.addView(tmpId);
                     //tab.addView(tb);
                     break;
@@ -135,7 +153,7 @@ public class UserDetailsActivity extends AppCompatActivity
                     spin.setAdapter(adapter);
 
                     // Identifies and displays user's current status
-                    final String userCurrentStatus = userDataMap.get("user_status").toUpperCase();
+                    final String userCurrentStatus = ((String)userDataMap.get("user_status")).toUpperCase();
 
                     // Determine and set initial position of spinner
                     int spinnerPosition = 0;
@@ -199,7 +217,7 @@ public class UserDetailsActivity extends AppCompatActivity
                     tab.addView(tb);
 
                     // Read user timetable
-                    String timeTable[] = userDataMap.get(field).split("/");
+                    String timeTable[] = ((String)userDataMap.get(field)).split("/");
                     int currentPeriod = 1;
 
                     // Format timetable display by Period: Class_name

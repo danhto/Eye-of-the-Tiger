@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity
     private EditText mPasswordView;
     private View mLoginFormView;
 
-    private ArrayList<Map<String, String>> admins;
+    private ArrayList<Map<String, Object>> admins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity
         admins = SplashScreen.getAdminInfo();
         Logger.getGlobal().log(Level.INFO, "" + admins.size());
 
-        for (Map<String, String> a : admins)
+        for (Map<String, Object> a : admins)
         {
             Logger.getGlobal().log(Level.INFO, a.toString() + "\t" + a.get("admin_first_name"));
         }
@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity
         }
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(user, password))
+        if (TextUtils.isEmpty(password) || !isPasswordValid(user, password))
         {
             mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity
     // user: admin, password: admin
     private boolean isUserValid(String user)
     {
-        for (Map<String, String> admin : admins)
+        for (Map<String, Object> admin : admins)
         {
             if (user.equals(admin.get("admin_first_name") + "_" + admin.get("admin_last_name")) || user.equals("admin"))
             {

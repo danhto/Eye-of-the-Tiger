@@ -16,7 +16,7 @@ import java.util.Map;
 // set up the splash screen before app starts
 public class SplashScreen extends Activity
 {
-    private static ArrayList<Map<String, String>> adminInfo;
+    private static ArrayList<Map<String, Object>> adminInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,7 +53,7 @@ public class SplashScreen extends Activity
         timerThread.start();
     }
 
-    public static ArrayList<Map<String, String>> getAdminInfo()
+    public static ArrayList<Map<String, Object>> getAdminInfo()
     {
         return adminInfo;
     }

@@ -1,9 +1,11 @@
 package org.eyeoftiger.eyeofthetiger;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import com.cloudant.sync.datastore.Attachment;
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.Datastore;
 import com.cloudant.sync.datastore.DatastoreManager;
@@ -19,8 +21,10 @@ import com.cloudant.sync.replication.ErrorInfo;
 import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
 import com.google.common.eventbus.Subscribe;
+import com.google.common.io.Files;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //import android.view.Gravity;
 //import android.widget.TextView;
@@ -39,7 +45,7 @@ import java.util.concurrent.CountDownLatch;
 public class DatabaseInfo
 {
 
-    private ArrayList<Map<String, String>> unsortedData = new ArrayList<Map<String, String>>();
+    private ArrayList<Map<String, Object>> unsortedData = new ArrayList<Map<String, Object>>();
     private Map<String, BasicDocumentRevision> dynamicUserDocuments;
     private static Datastore dynamicDatastore = null;
     private ArrayList<String[]> dataByLastName = new ArrayList<String[]>();
@@ -57,15 +63,15 @@ public class DatabaseInfo
 
     }
 
-    public ArrayList<Map<String, String>> getData()
+    public ArrayList<Map<String, Object>> getData()
     {
         return unsortedData;
     }
 
-    private ArrayList<Map<String, String>> retrieveRawData() throws DocumentNotFoundException
+    private ArrayList<Map<String, Object>> retrieveRawData() throws DocumentNotFoundException
     {
 
-        ArrayList<Map<String, String>> tmpList = new ArrayList<Map<String, String>>();
+        ArrayList<Map<String, Object>> tmpList = new ArrayList<Map<String, Object>>();
 
         // Create a DatastoreManager using application internal storage path
         File path = applicationContext.getDir("datastores", Context.MODE_PRIVATE);
@@ -82,6 +88,9 @@ public class DatabaseInfo
             ds = manager.openDatastore("datastore");
             ds2 = manager.openDatastore("datastore2");
             dynamicDatastore = ds2;
+
+             //File root = applicationContext.;
+
         }
         catch (DatastoreNotCreatedException e)
         {
@@ -106,7 +115,7 @@ public class DatabaseInfo
         }
 
         //An array that holds all the field names in the database
-        String keys[] = {"user_last_name", "user_first_name", "user_status"};
+        //String keys[] = {"user_last_name", "user_first_name", "user_status"};
 
         // Replicate from the remote to local database
         Replicator replicator = ReplicatorBuilder.pull().from(uri).to(ds).build();
@@ -157,11 +166,20 @@ public class DatabaseInfo
                 // dynamicUserDocuments.put(id, doc2);
 
                 //Parse json document into a map of fields -> values
-                Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
-                Map<String, String> docMap2 = parseJsonDoc(doc2.getBody().toString());
+                Map<String, Object> docMap = parseJsonDoc(doc.getBody().toString());
+                Map<String, Object> docMap2 = parseJsonDoc(doc2.getBody().toString());
 
                 //Place current document id into map
                 docMap.put("id", id);
+
+                //look for images
+                if (!doc.getAttachments().isEmpty()) {
+                    //just save the first one (better be an image)
+                    for (Map.Entry<String,Attachment> e : doc.getAttachments().entrySet()) {
+                        docMap.put("attachment", e.getValue());
+                    }
+
+                }
 
                 //Combine two documents maps into one
                 for (String key : docMap2.keySet())
@@ -179,10 +197,10 @@ public class DatabaseInfo
         return tmpList;
     }
 
-    static ArrayList<Map<String, String>> retrieveRawAdminData(Context appContext) throws DocumentNotFoundException
+    static ArrayList<Map<String, Object>> retrieveRawAdminData(Context appContext) throws DocumentNotFoundException
     {
 
-        ArrayList<Map<String, String>> tmpList = new ArrayList<>();
+        ArrayList<Map<String, Object>> tmpList = new ArrayList<>();
 
         // Create a DatastoreManager using application internal storage path
         File path = appContext.getDir("datastores", Context.MODE_PRIVATE);
@@ -244,10 +262,10 @@ public class DatabaseInfo
             //Gets the json object of the document
             BasicDocumentRevision doc = ds.getDocument(id);
 
-            Map<String, String> adminUser = new HashMap<>();
+            Map<String, Object> adminUser = new HashMap<>();
 
             //Parse json document into a map of fields -> values
-            Map<String, String> docMap = parseJsonDoc(doc.getBody().toString());
+            Map<String, Object> docMap = parseJsonDoc(doc.getBody().toString());
             if (docMap.isEmpty())
             {
                 continue;
@@ -277,7 +295,7 @@ public class DatabaseInfo
         return tmpList;
     }
 
-    private static Map<String, String> parseJsonDoc(String body)
+    private static Map<String, Object> parseJsonDoc(String body)
     {
         //i think theres a built-in JSON parser for android but whatever, whatever yourself bro! Come get some Charlie Murphy!
         if (!body.isEmpty())
@@ -294,7 +312,7 @@ public class DatabaseInfo
             //Json string you now be field: value, field: value, ...
 
             //This is map object that will hold fields and values
-            Map<String, String> dataMap = new TreeMap<String, String>();
+            Map<String, Object> dataMap = new TreeMap<>();
 
             //Split the json string into field: value pairs
             String docValues[] = removeExtras.split(",");
