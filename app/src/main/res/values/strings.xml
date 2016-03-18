@@ -17,7 +17,7 @@
     <string name="title_activity_display_user_data">Expected Attendees</string>
     <string name="website_link">Team Website</string>
     <string name="home_page">Home Page</string>
-    <string name="title_activity_user_details">Attendee Data</string>
+    <string name="title_activity_user_details"></string>
 
     <!-- Strings related to settings menu -->
     <string name="quit">Logout</string>

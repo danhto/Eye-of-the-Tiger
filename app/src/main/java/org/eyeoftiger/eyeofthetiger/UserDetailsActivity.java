@@ -38,8 +38,9 @@ public class UserDetailsActivity extends AppCompatActivity
 
         statusChanged = false;
         userData = MainActivity.dbData.getData();
-        TextView selectedUser = (TextView) findViewById(R.id.selected_name);
-        selectedUser.setText(DisplayUserData.selectedUser);
+        //TextView selectedUser = (TextView) findViewById(R.id.selected_name);
+        //selectedUser.setText(DisplayUserData.selectedUser);
+        setTitle(DisplayUserData.selectedUser);
         selectedPersonID = DisplayUserData.selectedUserID;
 
         //image if applicable
