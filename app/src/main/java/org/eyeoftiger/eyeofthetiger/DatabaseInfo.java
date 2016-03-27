@@ -1,9 +1,7 @@
 package org.eyeoftiger.eyeofthetiger;
 
 import android.content.Context;
-import android.os.Environment;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 
 import com.cloudant.sync.datastore.Attachment;
 import com.cloudant.sync.datastore.BasicDocumentRevision;
@@ -21,10 +19,8 @@ import com.cloudant.sync.replication.ErrorInfo;
 import com.cloudant.sync.replication.Replicator;
 import com.cloudant.sync.replication.ReplicatorBuilder;
 import com.google.common.eventbus.Subscribe;
-import com.google.common.io.Files;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -32,8 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+//import android.os.Environment;
 
 //import android.view.Gravity;
 //import android.widget.TextView;

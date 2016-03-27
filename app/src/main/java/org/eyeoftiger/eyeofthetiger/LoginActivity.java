@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity
                 }, 2000);
 
                 // loading toast message
-                Toast.makeText(getApplicationContext(), "Logging In ... Please wait", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Verifying login ... please wait", Toast.LENGTH_SHORT).show();
             }
         });
 

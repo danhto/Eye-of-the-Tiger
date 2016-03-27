@@ -15,7 +15,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_display_user_data">Expected Attendees</string>
-    <string name="website_link">Team Website</string>
+    <string name="website_link">Company Website</string>
     <string name="home_page">Home Page</string>
     <string name="title_activity_user_details"></string>
 
@@ -23,7 +23,7 @@
     <string name="quit">Logout</string>
     <string name="about">About</string>
     <string name="about_text">
-        "Eye Of the Tiger Team\n\n"
+        "Eye of the Tiger Team\n\n"
 
         "> Jason Kuffour\n"
         "> Aloka Kumaranayake\n"

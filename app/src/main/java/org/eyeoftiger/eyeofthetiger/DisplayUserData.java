@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-//import android.support.design.widget.FloatingActionButton;
-//import android.support.design.widget.Snackbar;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -20,6 +20,15 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cloudant.sync.datastore.Attachment;
+import com.cloudant.sync.datastore.DocumentNotFoundException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
+
+//import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.Snackbar;
 /*
 import com.cloudant.sync.datastore.BasicDocumentRevision;
 import com.cloudant.sync.datastore.DatastoreManager;
@@ -62,15 +71,6 @@ import java.util.List;
 import java.util.TreeMap;
 */
 
-import com.cloudant.sync.datastore.Attachment;
-import com.cloudant.sync.datastore.DocumentNotFoundException;
-
-import java.io.File;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class DisplayUserData extends AppCompatActivity
 {
@@ -92,6 +92,32 @@ public class DisplayUserData extends AppCompatActivity
         setSupportActionBar(toolbar);
         TableLayout tb = (TableLayout) findViewById(R.id.displayTable);
 
+        ////////////////
+
+        // swipe button snackbar
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Snackbar snack = Snackbar.make(view, "Swipe right on screen for Home", Snackbar.LENGTH_LONG).setAction("HOME PAGE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        //go to home page
+                        Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
+                        nextScreen.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(nextScreen);
+                    }
+                });
+
+                snack.show();
+            }
+        });
+
+        ///////////////////
+
         //Adds swipe functionality to whole secondary screen
         CoordinatorLayout secondaryview = (CoordinatorLayout) findViewById(R.id.secondaryview);
         secondaryview.setOnTouchListener(new OnSwipeTouchListener(this)
@@ -103,15 +129,14 @@ public class DisplayUserData extends AppCompatActivity
 
             public void onSwipeRight()
             {
-                //Starting a new Intent
-                //Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(nextScreen);
+                // loading toast message
+                Toast.makeText(getApplicationContext(), "Loading Home Page", Toast.LENGTH_SHORT).show();
+
                 finish();
 
                 //go to home page
                 Intent nextScreen = new Intent(getApplicationContext(), MainActivity.class);
                 nextScreen.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //nextScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextScreen);
             }
 

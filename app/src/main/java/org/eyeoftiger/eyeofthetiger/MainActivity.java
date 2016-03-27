@@ -1,9 +1,12 @@
 package org.eyeoftiger.eyeofthetiger;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,8 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
-import android.app.AlertDialog;
 import android.widget.Toast;
 
 import com.cloudant.sync.datastore.DocumentNotFoundException;
@@ -81,6 +82,32 @@ public class MainActivity extends AppCompatActivity
 
         updatePresentCount();
 
+        ////////////////
+
+        // swipe button snackbar
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Snackbar snack = Snackbar.make(view, "Swipe left on screen for Expected Attendees", Snackbar.LENGTH_LONG).setAction("NEXT PAGE", new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        //go to user data page
+                        Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
+                        startActivity(nextScreen);
+                    }
+                });
+
+                snack.show();
+            }
+        });
+
+        ///////////////////
+
         //Add swipe functionality to whole primary screen
         TableLayout mainview = (TableLayout) findViewById(R.id.mainview);
         mainview.setOnTouchListener(new OnSwipeTouchListener(this)
@@ -97,6 +124,9 @@ public class MainActivity extends AppCompatActivity
 
             public void onSwipeLeft()
             {
+                // loading toast message
+                Toast.makeText(getApplicationContext(), "Loading Expected Attendees", Toast.LENGTH_SHORT).show();
+
                 //go to user data page
                 Intent nextScreen = new Intent(getApplicationContext(), DisplayUserData.class);
                 startActivity(nextScreen);
@@ -158,7 +188,7 @@ public class MainActivity extends AppCompatActivity
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage("Do you want to logout?");
+        builder.setMessage("Do you want to log out?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
             @Override
@@ -236,7 +266,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.quit)
         {
             // logout toast message
-            Toast.makeText(getApplicationContext(), "Logging Out ...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Logging out ...", Toast.LENGTH_SHORT).show();
             finish();
         }
 

@@ -41,20 +41,26 @@ public class UserDetailsActivity extends AppCompatActivity
 
         statusChanged = false;
         userData = MainActivity.dbData.getData();
+
         //TextView selectedUser = (TextView) findViewById(R.id.selected_name);
         //selectedUser.setText(DisplayUserData.selectedUser);
+
         setTitle(DisplayUserData.selectedUser);
         selectedPersonID = DisplayUserData.selectedUserID;
 
         //image if applicable
         ImageView iview = (ImageView) findViewById(R.id.imageView1);
-        if (DisplayUserData.selectedUserAttachment != null) {
-            try {
+        if (DisplayUserData.selectedUserAttachment != null)
+        {
+            try
+            {
                 InputStream is =  DisplayUserData.selectedUserAttachment.getInputStream();
                 Bitmap bmap = BitmapFactory.decodeStream(is);
                 iview.setImageBitmap(bmap);
                 is.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -186,7 +192,7 @@ public class UserDetailsActivity extends AppCompatActivity
                             if (!status.equals(userCurrentStatus))
                             {
                                 // loading toast message
-                                Toast.makeText(getApplicationContext(), "Status Updated", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Current Status updated", Toast.LENGTH_LONG).show();
 
                                 writeNewStatusToDB(status);
                             }
