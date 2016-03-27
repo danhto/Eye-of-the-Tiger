@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity
             // If NPE is detected keep retreaving data until data is set
             while (dbData == null)
             {
-                dbData = new DatabaseInfo(getApplicationContext());
+                //dbData = new DatabaseInfo(getApplicationContext());
+                DatabaseInfo db = new DatabaseInfo(getApplicationContext());
+                db.run();
+                dbData = db;
             }
         }
         catch (DocumentNotFoundException e)
@@ -76,26 +79,7 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        //Count students
-        int present = 0;
-
-        for (int i = 0; i < dbData.getData().size(); i++)
-        {
-
-            if (!((String)dbData.getData().get(i).get("user_status")).toUpperCase().equals("ABSENT"))
-            {
-                present++;
-            }
-        }
-
-        //Update text views to show present and absent numbers
-        TextView presentTv = (TextView) findViewById(R.id.present_number);
-        presentTv.setText(String.format("%d", present));
-        presentTv.setBackgroundResource(R.drawable.cell_shape_main);
-
-        TextView absentTv = (TextView) findViewById(R.id.away_number);
-        absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
-        absentTv.setBackgroundResource(R.drawable.cell_shape_main);
+        updatePresentCount();
 
         //Add swipe functionality to whole primary screen
         TableLayout mainview = (TableLayout) findViewById(R.id.mainview);
@@ -131,6 +115,43 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    // Resync db everytime main activity is resumed
+    void OnResume() {
+        super.onResume();
+
+        try {
+            //dbData = new DatabaseInfo(getApplicationContext());
+            DatabaseInfo db = new DatabaseInfo(getApplicationContext());
+            db.run();
+            dbData = db;
+        }
+        catch (DocumentNotFoundException e) {
+            System.err.println(e);
+        }
+    }
+
+    private void updatePresentCount() {
+        //Count students
+        int present = 0;
+
+        for (int i = 0; i < dbData.getData().size(); i++)
+        {
+
+            if (!((String)dbData.getData().get(i).get("user_status")).toUpperCase().equals("ABSENT"))
+            {
+                present++;
+            }
+        }
+
+        //Update text views to show present and absent numbers
+        TextView presentTv = (TextView) findViewById(R.id.present_number);
+        presentTv.setText(String.format("%d", present));
+        presentTv.setBackgroundResource(R.drawable.cell_shape_main);
+
+        TextView absentTv = (TextView) findViewById(R.id.away_number);
+        absentTv.setText(String.format("%d", Math.abs(present - dbData.getData().size())));
+        absentTv.setBackgroundResource(R.drawable.cell_shape_main);
+    }
     //back button prompt on home page
     @Override
     public void onBackPressed()

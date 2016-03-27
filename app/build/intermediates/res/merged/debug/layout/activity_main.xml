@@ -79,7 +79,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/tiger_white"/>
 
         <!--include layout="@layout/content_main" /-->
@@ -87,5 +87,4 @@
     </TableLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
-<!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EyeOfTheTiger/app/src/main/res/layout/activity_main.xml -->
+</android.support.design.widget.CoordinatorLayout><!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EyeOfTheTiger/app/src/main/res/layout/activity_main.xml -->

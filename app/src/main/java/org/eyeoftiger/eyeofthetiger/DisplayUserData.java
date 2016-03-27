@@ -217,6 +217,9 @@ public class DisplayUserData extends AppCompatActivity
 
     }
 
+    /*
+     * Method creates table headings and calls method to populate table
+     */
     public void createColumnHeadings()
     {
         int headingTextSize = 20;
@@ -230,7 +233,7 @@ public class DisplayUserData extends AppCompatActivity
         //Define parameters of table layout
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(5, 1, 5, 1);
+        lp.setMargins(5, 3, 5, 3);
 
         //TextView is an object that lets you put text on the interface
         TextView LAST_NAME = new TextView(this);
@@ -253,6 +256,7 @@ public class DisplayUserData extends AppCompatActivity
         FIRST_NAME.setLayoutParams(lp);
         FIRST_NAME.setText("FIRST_NAME");
         FIRST_NAME.setBackgroundResource(R.drawable.cell_shape);
+        //FIRST_NAME.setWidth(80);
         FIRST_NAME.setGravity(Gravity.CENTER);
 
         TextView STATUS = new TextView(this);
@@ -288,7 +292,7 @@ public class DisplayUserData extends AppCompatActivity
 
         TableRow tb = null;
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(3, 1, 3, 1);
+        lp.setMargins(3, 3, 3, 3);
 
         ArrayList<Map<String, Object>> dbData = null;
 
@@ -365,9 +369,20 @@ public class DisplayUserData extends AppCompatActivity
 
                 TextView tmpTv = new TextView(this);
                 tmpTv.setTextSize(rowTextSize);
-                tmpTv.setLayoutParams(lp);
+                tmpTv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                //tmpTv.setLayoutParams(lp);
 
                 String value = (String)currentDoc.get(key);
+
+                if (value.length() > 9) {
+                    value = value.substring(0, 8) + "...";
+                }
+
+                // Parse user status and takes only the status not the entry/exit times
+                if (key.equals("user_status")) {
+                    String parse[] = value.split("/");
+                    value = parse[0];
+                }
 
                 if (!value.isEmpty()) {
                     tmpTv.setText(value);
@@ -380,7 +395,7 @@ public class DisplayUserData extends AppCompatActivity
 
             //Set the parameters of the table row
             tb.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-
+            tb.setBackgroundResource(R.drawable.button_shape);
             //Add the whole row with all document data to the table
             table.addView(tb);
         }

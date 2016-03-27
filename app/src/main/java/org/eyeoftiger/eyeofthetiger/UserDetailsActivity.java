@@ -26,6 +26,9 @@ public class UserDetailsActivity extends AppCompatActivity
 
     private ArrayList<Map<String, Object>> userData;
     private String selectedPersonID;
+    private final int STATUS_POS = 0;
+    private final int ENTRY_TIME = 1;
+    private final int EXIT_TIME = 2;
     static private boolean statusChanged;
 
     @Override
@@ -63,7 +66,7 @@ public class UserDetailsActivity extends AppCompatActivity
     private void fillDetailDisplay()
     {
 
-        int rowTextSize = 14;
+        int rowTextSize = 16;
         //Call the table object
         TableLayout tab = (TableLayout) findViewById(R.id.userDetailsTable);
         //LinearLayout lin = (LinearLayout) findViewById(R.id.userDetailsTimeTableInfo);
@@ -154,7 +157,7 @@ public class UserDetailsActivity extends AppCompatActivity
                     spin.setAdapter(adapter);
 
                     // Identifies and displays user's current status
-                    final String userCurrentStatus = ((String)userDataMap.get("user_status")).toUpperCase();
+                    final String userCurrentStatus = ((String)userDataMap.get("user_status")).toUpperCase().split("/")[STATUS_POS];
 
                     // Determine and set initial position of spinner
                     int spinnerPosition = 0;
@@ -227,19 +230,40 @@ public class UserDetailsActivity extends AppCompatActivity
                         tb = new TableRow(this);
                         tb.setLayoutParams(lp);
 
-                        // Pair time table with periods
-                        TextView period = new TextView(this);
+                        //Pair time table with periods and times
+                        //TextView period = new TextView(this);
                         TextView crs = new TextView(this);
-                        period.setTextSize(rowTextSize);
-                        period.setGravity(Gravity.CENTER);
+                        TextView entryTime = new TextView(this);
+                        TextView exitTime = new TextView(this);
+                        //period.setTextSize(rowTextSize);
+                        //period.setGravity(Gravity.CENTER);
                         crs.setTextSize(rowTextSize);
                         crs.setGravity(Gravity.CENTER);
+                        entryTime.setTextSize(rowTextSize);
+                        entryTime.setGravity(Gravity.CENTER);
+                        exitTime.setTextSize(rowTextSize);
+                        exitTime.setGravity(Gravity.CENTER);
 
-                        period.setText("Period " + currentPeriod + ":");
+                        // Get current period entry and exit times if present
+                        String dailyAttendance[] = ((String) userDataMap.get("user_daily_attendance")).split("/");
+
+                        if (dailyAttendance.length != 0) {
+                            dailyAttendance = ((String) userDataMap.get("user_status")).split("/");
+                        }
+
+                        // Guards against blank time information
+                        if (dailyAttendance.length > 1) {
+                            entryTime.setText(dailyAttendance[ENTRY_TIME]);
+                            exitTime.setText(dailyAttendance[EXIT_TIME]);
+                        }
+
+                        //period.setText("Period " + currentPeriod + ":");
                         crs.setText(course);
 
-                        tb.addView(period);
+                        //tb.addView(period);
                         tb.addView(crs);
+                        tb.addView(entryTime);
+                        tb.addView(exitTime);
                         tab.addView(tb);
 
                         currentPeriod++;

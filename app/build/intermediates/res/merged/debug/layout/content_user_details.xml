@@ -4,12 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_user_details" android:layout_width="match_parent"
+    tools:showIn="@layout/content_user_timetable" android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="org.eyeoftiger.eyeofthetiger.UserDetailsActivity">
+    android:isScrollContainer="true"
+    tools:context="org.eyeoftiger.eyeofthetiger.UserDetailsActivity"
+    >
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" android:text="@string/large_text" />
 
+    <TableLayout
+        android:id="@+id/userDetailsTable"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:stretchColumns="*"
+        android:shrinkColumns="*">
+
+
+
+    </TableLayout>
 </android.support.v4.widget.NestedScrollView>
+
 <!-- From: file:/C:/Users/DanLaptop/AndroidStudioProjects/EyeOfTheTiger/app/src/main/res/layout/content_user_details.xml -->

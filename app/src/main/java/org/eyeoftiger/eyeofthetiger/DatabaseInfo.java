@@ -42,7 +42,7 @@ import java.util.logging.Logger;
 /**
  * Created by DanLaptop on 11/10/2015.
  */
-public class DatabaseInfo
+public class DatabaseInfo implements Runnable
 {
 
     private ArrayList<Map<String, Object>> unsortedData = new ArrayList<Map<String, Object>>();
@@ -61,6 +61,15 @@ public class DatabaseInfo
         applicationContext = context;
         unsortedData = retrieveRawData();
 
+    }
+
+    public void run() {
+
+        try {
+            unsortedData = retrieveRawData();
+        } catch (DocumentNotFoundException e) {
+            System.err.println(e);
+        }
     }
 
     public ArrayList<Map<String, Object>> getData()
@@ -147,7 +156,6 @@ public class DatabaseInfo
 
         for (int i = 0; i < ds.getDocumentCount(); i++)
         {
-
             //Get _id of current document
             String id = ds.getAllDocumentIds().get(i).toString();
             BasicDocumentRevision doc = null;
@@ -337,25 +345,6 @@ public class DatabaseInfo
     }
 
     public static void setNewStatusData(Context appContext, String id, String status) {
-        /*
-        ArrayList<Map<String, String>> tmpList = new ArrayList<>();
-
-        // Create a DatastoreManager using application internal storage path
-        File path = appContext.getDir("datastores", Context.MODE_PRIVATE);
-        DatastoreManager manager = new DatastoreManager(path.getAbsolutePath());
-
-        Datastore ds = null;
-
-        //Open the local datastore
-        try
-        {
-            ds = manager.openDatastore("datastore");
-        }
-        catch (DatastoreNotCreatedException e)
-        {
-            e.printStackTrace();
-        }
-        */
 
         String databaseName[] = {"dynamic_user_info", "static_user_info", "administrator_info", "class_info"};
         String databaseKey = "hadjohneftemandstingunty";
@@ -380,8 +369,15 @@ public class DatabaseInfo
             MutableDocumentRevision revision = userDoc.mutableCopy();
             DocumentBody docContent = revision.getBody();
             Map<String, Object> contentMap = docContent.asMap();
+            String statusValue = ((String) contentMap.get("user_status"));
             contentMap.remove("user_status");
-            contentMap.put("user_status", status);
+
+            // Changes only the status value and keeps time values unchanged
+            if (statusValue.contains("/")) {
+                statusValue = status + statusValue.substring(statusValue.indexOf('/'));
+            }
+
+            contentMap.put("user_status", statusValue);
             revision.body = DocumentBodyFactory.create(contentMap);
             dynamicDatastore.updateDocumentFromRevision(revision);
 
